@@ -1,0 +1,1797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NSGVisitorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CoreCity">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreIdentityType">
+          <Key>
+            <PropertyRef Name="IdentityTypeID" />
+          </Key>
+          <Property Name="IdentityTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentityType" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreQuarterType">
+          <Key>
+            <PropertyRef Name="QuarterTypeID" />
+          </Key>
+          <Property Name="QuarterTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuarterTypeName" Type="varchar" MaxLength="100" />
+          <Property Name="MaxQuarterNumber" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreRank">
+          <Key>
+            <PropertyRef Name="RankID" />
+          </Key>
+          <Property Name="RankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RankName" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipID" />
+          </Key>
+          <Property Name="RelationshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Relationship" Type="varchar" MaxLength="100" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreState">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreUnit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitName" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoreUser">
+          <Key>
+            <PropertyRef Name="CoreUserID" />
+          </Key>
+          <Property Name="CoreUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CoVisitor">
+          <Key>
+            <PropertyRef Name="CoVisitorID" />
+          </Key>
+          <Property Name="CoVisitorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitorID" Type="bigint" Nullable="false" />
+          <Property Name="CoVisitorName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdentityTypeID" Type="int" />
+          <Property Name="IdentityNumber" Type="varchar" MaxLength="250" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="VisitorAddress" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="RelationshipID" Type="int" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SPName" Type="varchar" MaxLength="500" />
+          <Property Name="ErrorNumber" Type="int" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ErrorTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NSGEmployee">
+          <Key>
+            <PropertyRef Name="NSGEmployeeID" />
+          </Key>
+          <Property Name="NSGEmployeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NSGEmployeeCode" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RankID" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="QuarterTypeID" Type="int" />
+          <Property Name="QuarterNumber" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Visitor">
+          <Key>
+            <PropertyRef Name="VisitorID" />
+          </Key>
+          <Property Name="VisitorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachineID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="15" />
+          <Property Name="IdentityTypeID" Type="int" Nullable="false" />
+          <Property Name="IdentityNumber" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="VisitorAddress" Type="varchar" MaxLength="500" />
+          <Property Name="CityID" Type="bigint" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="250" />
+          <Property Name="Purpose" Type="varchar" MaxLength="500" />
+          <Property Name="PersonEmpCode" Type="varchar" MaxLength="50" />
+          <Property Name="PersonName" Type="varchar" MaxLength="250" />
+          <Property Name="RankID" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="QuarterTypeID" Type="int" />
+          <Property Name="QuarterNumber" Type="int" />
+          <Property Name="InTime" Type="datetime" Nullable="false" />
+          <Property Name="OutTime" Type="datetime" />
+          <Property Name="VisitorPhoto" Type="image" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreCity_StateID_CoreState_StateID">
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreState">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreCity_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreQuarterType">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreQuarterType">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRank_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRank">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRank_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRank">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreRelationship" Type="Self.CoreRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRelationship">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreRelationship" Type="Self.CoreRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRelationship">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreState_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreState">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreState_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreState">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreUnit_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreUnit">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreUnit">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+          <End Role="CoreIdentityType" Type="Self.CoreIdentityType" Multiplicity="0..1" />
+          <End Role="CoVisitor" Type="Self.CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreIdentityType">
+              <PropertyRef Name="IdentityTypeID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="IdentityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoVisitor" Type="Self.CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+          <End Role="CoreRelationship" Type="Self.CoreRelationship" Multiplicity="1" />
+          <End Role="CoVisitor" Type="Self.CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRelationship">
+              <PropertyRef Name="RelationshipID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="RelationshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoVisitor" Type="Self.CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_VisitorID_Visitor_VisitorID">
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="1" />
+          <End Role="CoVisitor" Type="Self.CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitor">
+              <PropertyRef Name="VisitorID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="VisitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdentityType_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreIdentityType" Type="Self.CoreIdentityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreIdentityType">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdentityType_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreIdentityType" Type="Self.CoreIdentityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreIdentityType">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="NSGEmployee" Type="Self.NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="0..1" />
+          <End Role="NSGEmployee" Type="Self.NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreQuarterType">
+              <PropertyRef Name="QuarterTypeID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="QuarterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_RankID_CoreRank_RankID">
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="0..1" />
+          <End Role="NSGEmployee" Type="Self.NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRank">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_UnitID_CoreUnit_UnitID">
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="0..1" />
+          <End Role="NSGEmployee" Type="Self.NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="NSGEmployee" Type="Self.NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_CityID_CoreCity_CityID">
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreCity">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID">
+          <End Role="CoreIdentityType" Type="Self.CoreIdentityType" Multiplicity="1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreIdentityType">
+              <PropertyRef Name="IdentityTypeID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="IdentityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreQuarterType">
+              <PropertyRef Name="QuarterTypeID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="QuarterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_RankID_CoreRank_RankID">
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRank">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_StateID_CoreState_StateID">
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreState">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_UnitID_CoreUnit_UnitID">
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="VisitorsDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="VisitorID" Type="bigint" Mode="In" />
+          <Parameter Name="VisitorName" Type="varchar" Mode="In" />
+          <Parameter Name="VisiedPerson" Type="varchar" Mode="In" />
+          <Parameter Name="CheckExitTime" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="NSGVisitorDBModelStoreContainer">
+          <EntitySet Name="CoreCity" EntityType="Self.CoreCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreIdentityType" EntityType="Self.CoreIdentityType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreQuarterType" EntityType="Self.CoreQuarterType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreRank" EntityType="Self.CoreRank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreRelationship" EntityType="Self.CoreRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreState" EntityType="Self.CoreState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreUnit" EntityType="Self.CoreUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoreUser" EntityType="Self.CoreUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoVisitor" EntityType="Self.CoVisitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NSGEmployee" EntityType="Self.NSGEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visitor" EntityType="Self.Visitor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreCity" EntitySet="CoreCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreCity_StateID_CoreState_StateID" Association="Self.FK_CoreCity_StateID_CoreState_StateID">
+            <End Role="CoreState" EntitySet="CoreState" />
+            <End Role="CoreCity" EntitySet="CoreCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreCity_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreCity_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreCity" EntitySet="CoreCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRank_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRank_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreRank" EntitySet="CoreRank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRank_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRank_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreRank" EntitySet="CoreRank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreRelationship" EntitySet="CoreRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreRelationship" EntitySet="CoreRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreState_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreState_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreState" EntitySet="CoreState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreState_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreState_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreState" EntitySet="CoreState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreUnit_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreUnit_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreUnit" EntitySet="CoreUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreUnit" EntitySet="CoreUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" Association="Self.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityType" />
+            <End Role="CoVisitor" EntitySet="CoVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoVisitor" EntitySet="CoVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" Association="Self.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+            <End Role="CoreRelationship" EntitySet="CoreRelationship" />
+            <End Role="CoVisitor" EntitySet="CoVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoVisitor" EntitySet="CoVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_VisitorID_Visitor_VisitorID" Association="Self.FK_CoVisitor_VisitorID_Visitor_VisitorID">
+            <End Role="Visitor" EntitySet="Visitor" />
+            <End Role="CoVisitor" EntitySet="CoVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdentityType_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_IdentityType_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID" Association="Self.FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterType" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_RankID_CoreRank_RankID" Association="Self.FK_NSGEmployee_RankID_CoreRank_RankID">
+            <End Role="CoreRank" EntitySet="CoreRank" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_UnitID_CoreUnit_UnitID" Association="Self.FK_NSGEmployee_UnitID_CoreUnit_UnitID">
+            <End Role="CoreUnit" EntitySet="CoreUnit" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_CityID_CoreCity_CityID" Association="Self.FK_Visitor_CityID_CoreCity_CityID">
+            <End Role="CoreCity" EntitySet="CoreCity" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_Visitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" Association="Self.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID">
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityType" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" Association="Self.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterType" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_RankID_CoreRank_RankID" Association="Self.FK_Visitor_RankID_CoreRank_RankID">
+            <End Role="CoreRank" EntitySet="CoreRank" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_StateID_CoreState_StateID" Association="Self.FK_Visitor_StateID_CoreState_StateID">
+            <End Role="CoreState" EntitySet="CoreState" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_UnitID_CoreUnit_UnitID" Association="Self.FK_Visitor_UnitID_CoreUnit_UnitID">
+            <End Role="CoreUnit" EntitySet="CoreUnit" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_Visitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="Visitor" EntitySet="Visitor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NSGVisitorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CoreCity">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreCity_EntryUserID_CoreUser_CoreUserID" FromRole="CoreCity" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreState" Relationship="Self.FK_CoreCity_StateID_CoreState_StateID" FromRole="CoreCity" ToRole="CoreState" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreCity_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreCity" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID" FromRole="CoreCity" ToRole="Visitor" />
+        </EntityType>
+        <EntityType Name="CoreQuarterType">
+          <Key>
+            <PropertyRef Name="QuarterTypeID" />
+          </Key>
+          <Property Name="QuarterTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuarterTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaxQuarterNumber" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID" FromRole="CoreQuarterType" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreQuarterType" ToRole="CoreUser" />
+          <NavigationProperty Name="NSGEmployees" Relationship="NSGVisitorDBModel.FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID" FromRole="CoreQuarterType" ToRole="NSGEmployee" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" FromRole="CoreQuarterType" ToRole="Visitor" />
+        </EntityType>
+        <EntityType Name="CoreRank">
+          <Key>
+            <PropertyRef Name="RankID" />
+          </Key>
+          <Property Name="RankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreRank_EntryUserID_CoreUser_CoreUserID" FromRole="CoreRank" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreRank_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreRank" ToRole="CoreUser" />
+          <NavigationProperty Name="NSGEmployees" Relationship="NSGVisitorDBModel.FK_NSGEmployee_RankID_CoreRank_RankID" FromRole="CoreRank" ToRole="NSGEmployee" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_RankID_CoreRank_RankID" FromRole="CoreRank" ToRole="Visitor" />
+          </EntityType>
+        <EntityType Name="CoreRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipID" />
+          </Key>
+          <Property Name="RelationshipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Relationship" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID" FromRole="CoreRelationship" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreRelationship" ToRole="CoreUser" />
+          <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" FromRole="CoreRelationship" ToRole="CoVisitor" />
+        </EntityType>
+        <EntityType Name="CoreState">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreCities" Relationship="Self.FK_CoreCity_StateID_CoreState_StateID" FromRole="CoreState" ToRole="CoreCity" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreState_EntryUserID_CoreUser_CoreUserID" FromRole="CoreState" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreState_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreState" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_StateID_CoreState_StateID" FromRole="CoreState" ToRole="Visitor" />
+        </EntityType>
+        <EntityType Name="CoreUnit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="Self.FK_CoreUnit_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUnit" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="Self.FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUnit" ToRole="CoreUser" />
+          <NavigationProperty Name="NSGEmployees" Relationship="NSGVisitorDBModel.FK_NSGEmployee_UnitID_CoreUnit_UnitID" FromRole="CoreUnit" ToRole="NSGEmployee" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_UnitID_CoreUnit_UnitID" FromRole="CoreUnit" ToRole="Visitor" />
+        </EntityType>
+        <EntityType Name="CoreUser">
+          <Key>
+            <PropertyRef Name="CoreUserID" />
+          </Key>
+          <Property Name="CoreUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreCities" Relationship="Self.FK_CoreCity_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreCity" />
+          <NavigationProperty Name="CoreCities1" Relationship="Self.FK_CoreCity_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreCity" />
+          <NavigationProperty Name="CoreQuarterTypes" Relationship="Self.FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreQuarterType" />
+          <NavigationProperty Name="CoreQuarterTypes1" Relationship="Self.FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreQuarterType" />
+          <NavigationProperty Name="CoreRanks" Relationship="Self.FK_CoreRank_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreRank" />
+          <NavigationProperty Name="CoreRanks1" Relationship="Self.FK_CoreRank_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreRank" />
+          <NavigationProperty Name="CoreRelationships" Relationship="Self.FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreRelationship" />
+          <NavigationProperty Name="CoreRelationships1" Relationship="Self.FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreRelationship" />
+          <NavigationProperty Name="CoreStates" Relationship="Self.FK_CoreState_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreState" />
+          <NavigationProperty Name="CoreStates1" Relationship="Self.FK_CoreState_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreState" />
+          <NavigationProperty Name="CoreUnits" Relationship="Self.FK_CoreUnit_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreUnit" />
+          <NavigationProperty Name="CoreUnits1" Relationship="Self.FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreUnit" />
+          <NavigationProperty Name="CoreIdentityTypes" Relationship="NSGVisitorDBModel.FK_IdentityType_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreIdentityType" />
+          <NavigationProperty Name="CoreIdentityTypes1" Relationship="NSGVisitorDBModel.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreIdentityType" />
+          <NavigationProperty Name="NSGEmployees" Relationship="NSGVisitorDBModel.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="NSGEmployee" />
+          <NavigationProperty Name="NSGEmployees1" Relationship="NSGVisitorDBModel.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="NSGEmployee" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
+          <NavigationProperty Name="Visitors1" Relationship="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
+          <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoVisitor" />
+          <NavigationProperty Name="CoVisitors1" Relationship="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoVisitor" />
+          </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SPName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorNumber" Type="Int32" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreCity_StateID_CoreState_StateID">
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreState">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreCity_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreCity">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreQuarterType">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreQuarterType" Type="Self.CoreQuarterType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreQuarterType">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRank_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRank">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRank_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreRank" Type="Self.CoreRank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRank">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreRelationship" Type="Self.CoreRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRelationship">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreRelationship" Type="Self.CoreRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreRelationship">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreState_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreState">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreState_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreState" Type="Self.CoreState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreState">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreUnit_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreUnit">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="CoreUnit" Type="Self.CoreUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreUnit">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NSGVisitorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CoreCities" EntityType="Self.CoreCity" />
+          <EntitySet Name="CoreQuarterTypes" EntityType="Self.CoreQuarterType" />
+          <EntitySet Name="CoreRanks" EntityType="Self.CoreRank" />
+          <EntitySet Name="CoreRelationships" EntityType="Self.CoreRelationship" />
+          <EntitySet Name="CoreStates" EntityType="Self.CoreState" />
+          <EntitySet Name="CoreUnits" EntityType="Self.CoreUnit" />
+          <EntitySet Name="CoreUsers" EntityType="Self.CoreUser" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <AssociationSet Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreCity" EntitySet="CoreCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreCity_StateID_CoreState_StateID" Association="Self.FK_CoreCity_StateID_CoreState_StateID">
+            <End Role="CoreState" EntitySet="CoreStates" />
+            <End Role="CoreCity" EntitySet="CoreCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreCity_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreCity_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreCity" EntitySet="CoreCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreQuarterType_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreQuarterType_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRank_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRank_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreRank" EntitySet="CoreRanks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRank_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRank_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreRank" EntitySet="CoreRanks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRelationship_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreRelationship" EntitySet="CoreRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreRelationship_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreRelationship" EntitySet="CoreRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreState_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreState_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreState" EntitySet="CoreStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreState_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreState_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreState" EntitySet="CoreStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreUnit_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreUnit_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreUnit" EntitySet="CoreUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_CoreUnit_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreUnit" EntitySet="CoreUnits" />
+          </AssociationSet>
+          <EntitySet Name="CoreIdentityTypes" EntityType="NSGVisitorDBModel.CoreIdentityType" />
+          <AssociationSet Name="FK_IdentityType_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_IdentityType_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
+          </AssociationSet>
+          <EntitySet Name="NSGEmployees" EntityType="NSGVisitorDBModel.NSGEmployee" />
+          <AssociationSet Name="FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID" Association="NSGVisitorDBModel.FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterTypes" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_RankID_CoreRank_RankID" Association="NSGVisitorDBModel.FK_NSGEmployee_RankID_CoreRank_RankID">
+            <End Role="CoreRank" EntitySet="CoreRanks" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_UnitID_CoreUnit_UnitID" Association="NSGVisitorDBModel.FK_NSGEmployee_UnitID_CoreUnit_UnitID">
+            <End Role="CoreUnit" EntitySet="CoreUnits" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="NSGEmployee" EntitySet="NSGEmployees" />
+          </AssociationSet>
+          <EntitySet Name="Visitors" EntityType="NSGVisitorDBModel.Visitor" />
+          <AssociationSet Name="FK_Visitor_CityID_CoreCity_CityID" Association="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID">
+            <End Role="CoreCity" EntitySet="CoreCities" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" Association="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID">
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" Association="NSGVisitorDBModel.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+            <End Role="CoreQuarterType" EntitySet="CoreQuarterTypes" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_RankID_CoreRank_RankID" Association="NSGVisitorDBModel.FK_Visitor_RankID_CoreRank_RankID">
+            <End Role="CoreRank" EntitySet="CoreRanks" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_StateID_CoreState_StateID" Association="NSGVisitorDBModel.FK_Visitor_StateID_CoreState_StateID">
+            <End Role="CoreState" EntitySet="CoreStates" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_UnitID_CoreUnit_UnitID" Association="NSGVisitorDBModel.FK_Visitor_UnitID_CoreUnit_UnitID">
+            <End Role="CoreUnit" EntitySet="CoreUnits" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitor_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="Visitor" EntitySet="Visitors" />
+          </AssociationSet>
+          <EntitySet Name="CoVisitors" EntityType="NSGVisitorDBModel.CoVisitor" />
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" Association="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+            <End Role="CoreRelationship" EntitySet="CoreRelationships" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_VisitorID_Visitor_VisitorID" Association="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID">
+            <End Role="Visitor" EntitySet="Visitors" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <FunctionImport Name="VisitorsDetailsGet" ReturnType="Collection(NSGVisitorDBModel.VisitorsDetailsGet_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="VisitorID" Mode="In" Type="Int64" />
+            <Parameter Name="VisitorName" Mode="In" Type="String" />
+            <Parameter Name="VisiedPerson" Mode="In" Type="String" />
+            <Parameter Name="CheckExitTime" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          </EntityContainer>
+        <EntityType Name="CoreIdentityType">
+          <Key>
+            <PropertyRef Name="IdentityTypeID" />
+          </Key>
+          <Property Name="IdentityTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentityType" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_IdentityType_EntryUserID_CoreUser_CoreUserID" FromRole="CoreIdentityType" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreIdentityType" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" FromRole="CoreIdentityType" ToRole="Visitor" />
+          <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" FromRole="CoreIdentityType" ToRole="CoVisitor" />
+          </EntityType>
+        <Association Name="FK_IdentityType_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreIdentityType">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdentityType_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoreIdentityType">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NSGEmployee">
+          <Key>
+            <PropertyRef Name="NSGEmployeeID" />
+          </Key>
+          <Property Name="NSGEmployeeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NSGEmployeeCode" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RankID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="QuarterTypeID" Type="Int32" />
+          <Property Name="QuarterNumber" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreQuarterType" Relationship="NSGVisitorDBModel.FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID" FromRole="NSGEmployee" ToRole="CoreQuarterType" />
+          <NavigationProperty Name="CoreRank" Relationship="NSGVisitorDBModel.FK_NSGEmployee_RankID_CoreRank_RankID" FromRole="NSGEmployee" ToRole="CoreRank" />
+          <NavigationProperty Name="CoreUnit" Relationship="NSGVisitorDBModel.FK_NSGEmployee_UnitID_CoreUnit_UnitID" FromRole="NSGEmployee" ToRole="CoreUnit" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" FromRole="NSGEmployee" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" FromRole="NSGEmployee" ToRole="CoreUser" />
+        </EntityType>
+        <Association Name="FK_NSGEmployee_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+          <End Type="NSGVisitorDBModel.CoreQuarterType" Role="CoreQuarterType" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.NSGEmployee" Role="NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreQuarterType">
+              <PropertyRef Name="QuarterTypeID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="QuarterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_RankID_CoreRank_RankID">
+          <End Type="NSGVisitorDBModel.CoreRank" Role="CoreRank" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.NSGEmployee" Role="NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRank">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_UnitID_CoreUnit_UnitID">
+          <End Type="NSGVisitorDBModel.CoreUnit" Role="CoreUnit" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.NSGEmployee" Role="NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.NSGEmployee" Role="NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.NSGEmployee" Role="NSGEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="NSGEmployee">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Visitor">
+          <Key>
+            <PropertyRef Name="VisitorID" />
+          </Key>
+          <Property Name="VisitorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachineID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdentityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="IdentityNumber" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="VisitorAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CityID" Type="Int64" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PersonEmpCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PersonName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RankID" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="QuarterTypeID" Type="Int32" />
+          <Property Name="QuarterNumber" Type="Int32" />
+          <Property Name="InTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OutTime" Type="DateTime" Precision="3" />
+          <Property Name="VisitorPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreCity" Relationship="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID" FromRole="Visitor" ToRole="CoreCity" />
+          <NavigationProperty Name="CoreIdentityType" Relationship="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" FromRole="Visitor" ToRole="CoreIdentityType" />
+          <NavigationProperty Name="CoreQuarterType" Relationship="NSGVisitorDBModel.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" FromRole="Visitor" ToRole="CoreQuarterType" />
+          <NavigationProperty Name="CoreRank" Relationship="NSGVisitorDBModel.FK_Visitor_RankID_CoreRank_RankID" FromRole="Visitor" ToRole="CoreRank" />
+          <NavigationProperty Name="CoreState" Relationship="NSGVisitorDBModel.FK_Visitor_StateID_CoreState_StateID" FromRole="Visitor" ToRole="CoreState" />
+          <NavigationProperty Name="CoreUnit" Relationship="NSGVisitorDBModel.FK_Visitor_UnitID_CoreUnit_UnitID" FromRole="Visitor" ToRole="CoreUnit" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" FromRole="Visitor" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" FromRole="Visitor" ToRole="CoreUser" />
+          <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" FromRole="Visitor" ToRole="CoVisitor" />
+        </EntityType>
+        <Association Name="FK_Visitor_CityID_CoreCity_CityID">
+          <End Type="NSGVisitorDBModel.CoreCity" Role="CoreCity" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreCity">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID">
+          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreIdentityType">
+              <PropertyRef Name="IdentityTypeID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="IdentityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID">
+          <End Type="NSGVisitorDBModel.CoreQuarterType" Role="CoreQuarterType" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreQuarterType">
+              <PropertyRef Name="QuarterTypeID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="QuarterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_RankID_CoreRank_RankID">
+          <End Type="NSGVisitorDBModel.CoreRank" Role="CoreRank" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRank">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_StateID_CoreState_StateID">
+          <End Type="NSGVisitorDBModel.CoreState" Role="CoreState" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreState">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_UnitID_CoreUnit_UnitID">
+          <End Type="NSGVisitorDBModel.CoreUnit" Role="CoreUnit" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="Visitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CoVisitor">
+          <Key>
+            <PropertyRef Name="CoVisitorID" />
+          </Key>
+          <Property Name="CoVisitorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitorID" Type="Int64" Nullable="false" />
+          <Property Name="CoVisitorName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdentityTypeID" Type="Int32" />
+          <Property Name="IdentityNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VisitorAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RelationshipID" Type="Int32" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreIdentityType" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" FromRole="CoVisitor" ToRole="CoreIdentityType" />
+          <NavigationProperty Name="CoreRelationship" Relationship="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" FromRole="CoVisitor" ToRole="CoreRelationship" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitor" Relationship="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" FromRole="CoVisitor" ToRole="Visitor" />
+        </EntityType>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreIdentityType">
+              <PropertyRef Name="IdentityTypeID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="IdentityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+          <End Type="NSGVisitorDBModel.CoreRelationship" Role="CoreRelationship" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRelationship">
+              <PropertyRef Name="RelationshipID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="RelationshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_VisitorID_Visitor_VisitorID">
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitor">
+              <PropertyRef Name="VisitorID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="VisitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="VisitorsDetailsGet_Result">
+          <Property Type="Int64" Name="VisitorID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="IdentityType" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="IdentityNumber" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Purpose" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PersonName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="RankName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="InTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="OutTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CoVisitors" Nullable="false" />
+          <Property Type="String" Name="EntryBy" Nullable="true" MaxLength="501" />
+          <Property Type="String" Name="ExitBy" Nullable="false" MaxLength="501" />
+          <Property Type="String" Name="MachineID" Nullable="false" MaxLength="250" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NSGVisitorDBModelStoreContainer" CdmEntityContainer="NSGVisitorEntities">
+          <EntitySetMapping Name="CoreCities">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreCity">
+              <MappingFragment StoreEntitySet="CoreCity">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreQuarterTypes">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreQuarterType">
+              <MappingFragment StoreEntitySet="CoreQuarterType">
+                <ScalarProperty Name="QuarterTypeID" ColumnName="QuarterTypeID" />
+                <ScalarProperty Name="QuarterTypeName" ColumnName="QuarterTypeName" />
+                <ScalarProperty Name="MaxQuarterNumber" ColumnName="MaxQuarterNumber" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreRanks">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreRank">
+              <MappingFragment StoreEntitySet="CoreRank">
+                <ScalarProperty Name="RankID" ColumnName="RankID" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreRelationships">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreRelationship">
+              <MappingFragment StoreEntitySet="CoreRelationship">
+                <ScalarProperty Name="RelationshipID" ColumnName="RelationshipID" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreStates">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreState">
+              <MappingFragment StoreEntitySet="CoreState">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreUnits">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreUnit">
+              <MappingFragment StoreEntitySet="CoreUnit">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreUsers">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreUser">
+              <MappingFragment StoreEntitySet="CoreUser">
+                <ScalarProperty Name="CoreUserID" ColumnName="CoreUserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
+                <ScalarProperty Name="SPName" ColumnName="SPName" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoreIdentityTypes">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoreIdentityType">
+              <MappingFragment StoreEntitySet="CoreIdentityType">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="IdentityTypeID" ColumnName="IdentityTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NSGEmployees">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.NSGEmployee">
+              <MappingFragment StoreEntitySet="NSGEmployee">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="QuarterNumber" ColumnName="QuarterNumber" />
+                <ScalarProperty Name="QuarterTypeID" ColumnName="QuarterTypeID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="RankID" ColumnName="RankID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="NSGEmployeeCode" ColumnName="NSGEmployeeCode" />
+                <ScalarProperty Name="NSGEmployeeID" ColumnName="NSGEmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visitors">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.Visitor">
+              <MappingFragment StoreEntitySet="Visitor">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="VisitorPhoto" ColumnName="VisitorPhoto" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="QuarterNumber" ColumnName="QuarterNumber" />
+                <ScalarProperty Name="QuarterTypeID" ColumnName="QuarterTypeID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="RankID" ColumnName="RankID" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="PersonEmpCode" ColumnName="PersonEmpCode" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="VisitorAddress" ColumnName="VisitorAddress" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="IdentityTypeID" ColumnName="IdentityTypeID" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoVisitors">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoVisitor">
+              <MappingFragment StoreEntitySet="CoVisitor">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="RelationshipID" ColumnName="RelationshipID" />
+                <ScalarProperty Name="VisitorAddress" ColumnName="VisitorAddress" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="IdentityTypeID" ColumnName="IdentityTypeID" />
+                <ScalarProperty Name="CoVisitorName" ColumnName="CoVisitorName" />
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="CoVisitorID" ColumnName="CoVisitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="VisitorsDetailsGet" FunctionName="NSGVisitorDBModel.Store.VisitorsDetailsGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NSGVisitorDBModel.VisitorsDetailsGet_Result">
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="CoVisitors" ColumnName="CoVisitors" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+                <ScalarProperty Name="ExitBy" ColumnName="ExitBy" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

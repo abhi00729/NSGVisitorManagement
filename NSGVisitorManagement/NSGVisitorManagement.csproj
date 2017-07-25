@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9A280A5-EC3D-4E81-9609-3EA1EAF52AA7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSGVisitorManagement</RootNamespace>
+    <AssemblyName>NSGVisitorManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\MyProjects\NSGVisitorManagement\Publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>NSG Visitor Management</ProductName>
+    <PublisherName>Mrida Systems and Technology</PublisherName>
+    <SuiteName>NSG Visitor Management</SuiteName>
+    <DisallowUrlActivation>true</DisallowUrlActivation>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3A9DC12696D60A9C986DF2E295040A249FAD13DA</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NSGVisitorManagement_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>NSGVisitorManagement.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>nsgvms_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ThermalPrinter.cs" />
+    <Compile Include="Classes\DBOperation.cs" />
+    <Compile Include="Classes\Encryptor.cs" />
+    <Compile Include="Classes\GlobalClass.cs" />
+    <Compile Include="Classes\PrintDirect.cs" />
+    <Compile Include="Classes\Validation.cs" />
+    <Compile Include="Classes\VisitorDetails.cs" />
+    <Compile Include="Classes\WebCamera.cs" />
+    <Compile Include="DAL\CoreCity.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreIdentityType.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreQuarterType.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreRank.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreRelationship.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreState.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreUnit.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoreUser.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CoVisitor.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ErrorLog.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NSGEmployee.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NSGVisitorDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NSGVisitorDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NSGVisitorDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\NSGVisitorDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Visitor.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\VisitorsDetailsGet_Result.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCapturePhoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCapturePhoto.Designer.cs">
+      <DependentUpon>frmCapturePhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCreateUser.Designer.cs">
+      <DependentUpon>frmCreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMainPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMainPage.Designer.cs">
+      <DependentUpon>frmMainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Forms\frmMasterList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMasterList.Designer.cs">
+      <DependentUpon>frmMasterList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmVisitorSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmVisitorSearch.Designer.cs">
+      <DependentUpon>frmVisitorSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmVisitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmVisitor.Designer.cs">
+      <DependentUpon>frmVisitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMastersListEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMastersListEdit.Designer.cs">
+      <DependentUpon>frmMastersListEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Forms\frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCapturePhoto.resx">
+      <DependentUpon>frmCapturePhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCreateUser.resx">
+      <DependentUpon>frmCreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMainPage.resx">
+      <DependentUpon>frmMainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMasterList.resx">
+      <DependentUpon>frmMasterList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmVisitorSearch.resx">
+      <DependentUpon>frmVisitorSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmVisitor.resx">
+      <DependentUpon>frmVisitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMastersListEdit.resx">
+      <DependentUpon>frmMastersListEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="DAL\NSGVisitorDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NSGVisitorDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\NSGVisitorDBModel.edmx.diagram">
+      <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="NSGVisitorManagement_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NSGLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL\NSGVisitorDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
+      <LastGenOutput>NSGVisitorDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\NSGVisitorDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
+      <LastGenOutput>NSGVisitorDBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="nsgvms_icon.ico" />
+    <Content Include="Resources\Excel.ico" />
+    <Content Include="Resources\ExcelIcon.png" />
+    <Content Include="Resources\NSGVMS.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
