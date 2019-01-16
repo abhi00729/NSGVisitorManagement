@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <PublishUrlHistory>D:\MyProjects\NSGVisitorManagement\Publish\|publish\</PublishUrlHistory>
+    <PublishUrlHistory>E:\MyProjects\Repos\NSGVisitorManagement\Publish\|D:\MyProjects\Repos\NSGVisitorManagement\Publish\|D:\MyProjects\NSGVisitorManagement\Publish\|publish\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />
@@ -10,5 +10,8 @@
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
 </Project>

@@ -37,10 +37,44 @@ namespace NSGVisitorManagement.DAL
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<CoreIdentityType> CoreIdentityTypes { get; set; }
         public virtual DbSet<NSGEmployee> NSGEmployees { get; set; }
-        public virtual DbSet<Visitor> Visitors { get; set; }
         public virtual DbSet<CoVisitor> CoVisitors { get; set; }
+        public virtual DbSet<Visitor> Visitors { get; set; }
+        public virtual DbSet<BlackListedVisitor> BlackListedVisitors { get; set; }
     
-        public virtual ObjectResult<VisitorsDetailsGet_Result> VisitorsDetailsGet(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<long> visitorID, string visitorName, string visiedPerson, Nullable<bool> checkExitTime)
+        public virtual ObjectResult<BlackListedVisitorDetailsGet_Result> BlackListedVisitorDetailsGet(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string visitorName, string visiedPerson, string mobileNo, Nullable<bool> unListed, Nullable<int> maxRows)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var visitorNameParameter = visitorName != null ?
+                new ObjectParameter("VisitorName", visitorName) :
+                new ObjectParameter("VisitorName", typeof(string));
+    
+            var visiedPersonParameter = visiedPerson != null ?
+                new ObjectParameter("VisiedPerson", visiedPerson) :
+                new ObjectParameter("VisiedPerson", typeof(string));
+    
+            var mobileNoParameter = mobileNo != null ?
+                new ObjectParameter("MobileNo", mobileNo) :
+                new ObjectParameter("MobileNo", typeof(string));
+    
+            var unListedParameter = unListed.HasValue ?
+                new ObjectParameter("UnListed", unListed) :
+                new ObjectParameter("UnListed", typeof(bool));
+    
+            var maxRowsParameter = maxRows.HasValue ?
+                new ObjectParameter("MaxRows", maxRows) :
+                new ObjectParameter("MaxRows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BlackListedVisitorDetailsGet_Result>("BlackListedVisitorDetailsGet", fromDateParameter, toDateParameter, visitorNameParameter, visiedPersonParameter, mobileNoParameter, unListedParameter, maxRowsParameter);
+        }
+    
+        public virtual ObjectResult<VisitorsDetailsGet_Result> VisitorsDetailsGet(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<long> visitorID, string visitorName, string visiedPerson, Nullable<bool> checkExitTime, string mobileNo, Nullable<int> maxRows)
         {
             var fromDateParameter = fromDate.HasValue ?
                 new ObjectParameter("FromDate", fromDate) :
@@ -66,7 +100,61 @@ namespace NSGVisitorManagement.DAL
                 new ObjectParameter("CheckExitTime", checkExitTime) :
                 new ObjectParameter("CheckExitTime", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VisitorsDetailsGet_Result>("VisitorsDetailsGet", fromDateParameter, toDateParameter, visitorIDParameter, visitorNameParameter, visiedPersonParameter, checkExitTimeParameter);
+            var mobileNoParameter = mobileNo != null ?
+                new ObjectParameter("MobileNo", mobileNo) :
+                new ObjectParameter("MobileNo", typeof(string));
+    
+            var maxRowsParameter = maxRows.HasValue ?
+                new ObjectParameter("MaxRows", maxRows) :
+                new ObjectParameter("MaxRows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VisitorsDetailsGet_Result>("VisitorsDetailsGet", fromDateParameter, toDateParameter, visitorIDParameter, visitorNameParameter, visiedPersonParameter, checkExitTimeParameter, mobileNoParameter, maxRowsParameter);
+        }
+    
+        public virtual ObjectResult<TimeExpiredVisitorDetailsGet_Result> TimeExpiredVisitorDetailsGet(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<long> visitorID, string visitorName, string visiedPerson, string mobileNo, Nullable<bool> includeExited, Nullable<int> maxRows)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var visitorIDParameter = visitorID.HasValue ?
+                new ObjectParameter("VisitorID", visitorID) :
+                new ObjectParameter("VisitorID", typeof(long));
+    
+            var visitorNameParameter = visitorName != null ?
+                new ObjectParameter("VisitorName", visitorName) :
+                new ObjectParameter("VisitorName", typeof(string));
+    
+            var visiedPersonParameter = visiedPerson != null ?
+                new ObjectParameter("VisiedPerson", visiedPerson) :
+                new ObjectParameter("VisiedPerson", typeof(string));
+    
+            var mobileNoParameter = mobileNo != null ?
+                new ObjectParameter("MobileNo", mobileNo) :
+                new ObjectParameter("MobileNo", typeof(string));
+    
+            var includeExitedParameter = includeExited.HasValue ?
+                new ObjectParameter("IncludeExited", includeExited) :
+                new ObjectParameter("IncludeExited", typeof(bool));
+    
+            var maxRowsParameter = maxRows.HasValue ?
+                new ObjectParameter("MaxRows", maxRows) :
+                new ObjectParameter("MaxRows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TimeExpiredVisitorDetailsGet_Result>("TimeExpiredVisitorDetailsGet", fromDateParameter, toDateParameter, visitorIDParameter, visitorNameParameter, visiedPersonParameter, mobileNoParameter, includeExitedParameter, maxRowsParameter);
+        }
+    
+        public virtual ObjectResult<GetNotExitedVisitorsForTheDate_Result> GetNotExitedVisitorsForTheDate(Nullable<System.DateTime> forDate)
+        {
+            var forDateParameter = forDate.HasValue ?
+                new ObjectParameter("ForDate", forDate) :
+                new ObjectParameter("ForDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetNotExitedVisitorsForTheDate_Result>("GetNotExitedVisitorsForTheDate", forDateParameter);
         }
     }
 }

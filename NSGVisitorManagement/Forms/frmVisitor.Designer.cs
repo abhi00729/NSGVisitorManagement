@@ -84,9 +84,16 @@
             this.txtMobileNo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbGender = new System.Windows.Forms.ComboBox();
+            this.txtVisitedPersonMobile = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dteValidTill = new System.Windows.Forms.DateTimePicker();
+            this.label14 = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmBlackList = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picVisitorPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoVisitors)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblVisitorNumber
@@ -129,7 +136,7 @@
             this.btnCapture.Location = new System.Drawing.Point(7, 238);
             this.btnCapture.Name = "btnCapture";
             this.btnCapture.Size = new System.Drawing.Size(193, 60);
-            this.btnCapture.TabIndex = 20;
+            this.btnCapture.TabIndex = 21;
             this.btnCapture.Text = "&Capture Photo";
             this.btnCapture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCapture.UseVisualStyleBackColor = true;
@@ -151,7 +158,7 @@
             // 
             this.txtFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtFirstName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFirstName.Location = new System.Drawing.Point(96, 66);
+            this.txtFirstName.Location = new System.Drawing.Point(96, 59);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(237, 21);
             this.txtFirstName.TabIndex = 2;
@@ -162,7 +169,7 @@
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(6, 69);
+            this.lblFirstName.Location = new System.Drawing.Point(6, 61);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(84, 16);
             this.lblFirstName.TabIndex = 4;
@@ -172,7 +179,7 @@
             // 
             this.txtLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtLastName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLastName.Location = new System.Drawing.Point(95, 99);
+            this.txtLastName.Location = new System.Drawing.Point(95, 86);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(238, 21);
             this.txtLastName.TabIndex = 3;
@@ -183,7 +190,7 @@
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(6, 102);
+            this.lblLastName.Location = new System.Drawing.Point(6, 89);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(83, 16);
             this.lblLastName.TabIndex = 6;
@@ -193,7 +200,7 @@
             // 
             this.lblIdentityType.AutoSize = true;
             this.lblIdentityType.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdentityType.Location = new System.Drawing.Point(6, 169);
+            this.lblIdentityType.Location = new System.Drawing.Point(6, 150);
             this.lblIdentityType.Name = "lblIdentityType";
             this.lblIdentityType.Size = new System.Drawing.Size(97, 16);
             this.lblIdentityType.TabIndex = 8;
@@ -203,7 +210,7 @@
             // 
             this.txtIdentityNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtIdentityNumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdentityNumber.Location = new System.Drawing.Point(129, 201);
+            this.txtIdentityNumber.Location = new System.Drawing.Point(129, 176);
             this.txtIdentityNumber.Name = "txtIdentityNumber";
             this.txtIdentityNumber.Size = new System.Drawing.Size(204, 21);
             this.txtIdentityNumber.TabIndex = 6;
@@ -212,7 +219,7 @@
             // 
             this.lblIdentityNumber.AutoSize = true;
             this.lblIdentityNumber.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdentityNumber.Location = new System.Drawing.Point(6, 204);
+            this.lblIdentityNumber.Location = new System.Drawing.Point(6, 178);
             this.lblIdentityNumber.Name = "lblIdentityNumber";
             this.lblIdentityNumber.Size = new System.Drawing.Size(117, 16);
             this.lblIdentityNumber.TabIndex = 10;
@@ -222,18 +229,18 @@
             // 
             this.txtVisitorAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtVisitorAddress.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVisitorAddress.Location = new System.Drawing.Point(9, 251);
+            this.txtVisitorAddress.Location = new System.Drawing.Point(6, 225);
             this.txtVisitorAddress.Multiline = true;
             this.txtVisitorAddress.Name = "txtVisitorAddress";
             this.txtVisitorAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtVisitorAddress.Size = new System.Drawing.Size(324, 48);
+            this.txtVisitorAddress.Size = new System.Drawing.Size(327, 58);
             this.txtVisitorAddress.TabIndex = 7;
             // 
             // lblVisitorAddress
             // 
             this.lblVisitorAddress.AutoSize = true;
             this.lblVisitorAddress.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisitorAddress.Location = new System.Drawing.Point(6, 232);
+            this.lblVisitorAddress.Location = new System.Drawing.Point(6, 206);
             this.lblVisitorAddress.Name = "lblVisitorAddress";
             this.lblVisitorAddress.Size = new System.Drawing.Size(119, 16);
             this.lblVisitorAddress.TabIndex = 13;
@@ -246,7 +253,7 @@
             this.cmbIdentityType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbIdentityType.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbIdentityType.FormattingEnabled = true;
-            this.cmbIdentityType.Location = new System.Drawing.Point(109, 167);
+            this.cmbIdentityType.Location = new System.Drawing.Point(109, 147);
             this.cmbIdentityType.Name = "cmbIdentityType";
             this.cmbIdentityType.Size = new System.Drawing.Size(224, 23);
             this.cmbIdentityType.TabIndex = 5;
@@ -260,7 +267,7 @@
             this.btnCancel.Location = new System.Drawing.Point(715, 465);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(166, 35);
-            this.btnCancel.TabIndex = 23;
+            this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Ca&ncel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -273,7 +280,7 @@
             this.btnEnter.Location = new System.Drawing.Point(715, 370);
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.Size = new System.Drawing.Size(166, 35);
-            this.btnEnter.TabIndex = 21;
+            this.btnEnter.TabIndex = 22;
             this.btnEnter.Text = "&Save Entry";
             this.btnEnter.UseVisualStyleBackColor = false;
             this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
@@ -293,7 +300,7 @@
             this.dgvCoVisitors.Location = new System.Drawing.Point(9, 370);
             this.dgvCoVisitors.Name = "dgvCoVisitors";
             this.dgvCoVisitors.Size = new System.Drawing.Size(692, 131);
-            this.dgvCoVisitors.TabIndex = 18;
+            this.dgvCoVisitors.TabIndex = 20;
             this.dgvCoVisitors.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvCoVisitors_UserDeletingRow);
             // 
             // CoVisitorID
@@ -342,16 +349,16 @@
             this.cmbCity.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbCity.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCity.FormattingEnabled = true;
-            this.cmbCity.Location = new System.Drawing.Point(52, 339);
+            this.cmbCity.Location = new System.Drawing.Point(61, 317);
             this.cmbCity.Name = "cmbCity";
-            this.cmbCity.Size = new System.Drawing.Size(281, 23);
+            this.cmbCity.Size = new System.Drawing.Size(272, 23);
             this.cmbCity.TabIndex = 9;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 341);
+            this.label1.Location = new System.Drawing.Point(6, 320);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 16);
             this.label1.TabIndex = 19;
@@ -364,7 +371,7 @@
             this.cmbState.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbState.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbState.FormattingEnabled = true;
-            this.cmbState.Location = new System.Drawing.Point(61, 307);
+            this.cmbState.Location = new System.Drawing.Point(61, 288);
             this.cmbState.Name = "cmbState";
             this.cmbState.Size = new System.Drawing.Size(272, 23);
             this.cmbState.TabIndex = 8;
@@ -374,7 +381,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 308);
+            this.label2.Location = new System.Drawing.Point(6, 291);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 21;
@@ -384,7 +391,7 @@
             // 
             this.txtVehicleNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtVehicleNumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVehicleNumber.Location = new System.Drawing.Point(467, 70);
+            this.txtVehicleNumber.Location = new System.Drawing.Point(467, 59);
             this.txtVehicleNumber.Name = "txtVehicleNumber";
             this.txtVehicleNumber.Size = new System.Drawing.Size(206, 21);
             this.txtVehicleNumber.TabIndex = 10;
@@ -393,7 +400,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(344, 72);
+            this.label3.Location = new System.Drawing.Point(344, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 16);
             this.label3.TabIndex = 23;
@@ -408,7 +415,7 @@
             this.btnPrint.Location = new System.Drawing.Point(715, 417);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(166, 35);
-            this.btnPrint.TabIndex = 22;
+            this.btnPrint.TabIndex = 23;
             this.btnPrint.Text = "&Print";
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
@@ -422,7 +429,7 @@
             this.txtEntryTime.Name = "txtEntryTime";
             this.txtEntryTime.ReadOnly = true;
             this.txtEntryTime.Size = new System.Drawing.Size(231, 22);
-            this.txtEntryTime.TabIndex = 24;
+            this.txtEntryTime.TabIndex = 25;
             // 
             // lblEntryTime
             // 
@@ -438,7 +445,7 @@
             // 
             this.lblExitTime.AutoSize = true;
             this.lblExitTime.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExitTime.Location = new System.Drawing.Point(344, 39);
+            this.lblExitTime.Location = new System.Drawing.Point(344, 35);
             this.lblExitTime.Name = "lblExitTime";
             this.lblExitTime.Size = new System.Drawing.Size(76, 16);
             this.lblExitTime.TabIndex = 27;
@@ -449,7 +456,7 @@
             this.txtExitTime.BackColor = System.Drawing.Color.Black;
             this.txtExitTime.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExitTime.ForeColor = System.Drawing.Color.Lime;
-            this.txtExitTime.Location = new System.Drawing.Point(442, 36);
+            this.txtExitTime.Location = new System.Drawing.Point(442, 32);
             this.txtExitTime.Name = "txtExitTime";
             this.txtExitTime.ReadOnly = true;
             this.txtExitTime.Size = new System.Drawing.Size(231, 22);
@@ -464,10 +471,10 @@
             // 
             this.txtQuarterNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtQuarterNumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuarterNumber.Location = new System.Drawing.Point(464, 330);
+            this.txtQuarterNumber.Location = new System.Drawing.Point(467, 318);
             this.txtQuarterNumber.Name = "txtQuarterNumber";
-            this.txtQuarterNumber.Size = new System.Drawing.Size(209, 21);
-            this.txtQuarterNumber.TabIndex = 17;
+            this.txtQuarterNumber.Size = new System.Drawing.Size(206, 21);
+            this.txtQuarterNumber.TabIndex = 18;
             this.txtQuarterNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuarterNumber_KeyPress);
             this.txtQuarterNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtQuarterNumber_Validating);
             // 
@@ -477,20 +484,21 @@
             this.cmbQuarterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbQuarterType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbQuarterType.FormattingEnabled = true;
-            this.cmbQuarterType.Location = new System.Drawing.Point(442, 295);
+            this.cmbQuarterType.Location = new System.Drawing.Point(448, 289);
             this.cmbQuarterType.Name = "cmbQuarterType";
-            this.cmbQuarterType.Size = new System.Drawing.Size(231, 21);
-            this.cmbQuarterType.TabIndex = 16;
+            this.cmbQuarterType.Size = new System.Drawing.Size(225, 21);
+            this.cmbQuarterType.TabIndex = 17;
+            this.cmbQuarterType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbQuarterType_KeyDown);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(344, 332);
+            this.label10.Location = new System.Drawing.Point(344, 320);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 16);
+            this.label10.Size = new System.Drawing.Size(118, 16);
             this.label10.TabIndex = 125;
-            this.label10.Text = "Quarter Number:";
+            this.label10.Text = "Quarter Number :";
             // 
             // cmbUnit
             // 
@@ -498,10 +506,10 @@
             this.cmbUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUnit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbUnit.FormattingEnabled = true;
-            this.cmbUnit.Location = new System.Drawing.Point(397, 262);
+            this.cmbUnit.Location = new System.Drawing.Point(391, 259);
             this.cmbUnit.Name = "cmbUnit";
-            this.cmbUnit.Size = new System.Drawing.Size(206, 21);
-            this.cmbUnit.TabIndex = 15;
+            this.cmbUnit.Size = new System.Drawing.Size(282, 21);
+            this.cmbUnit.TabIndex = 16;
             // 
             // cmbRank
             // 
@@ -509,47 +517,47 @@
             this.cmbRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRank.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbRank.FormattingEnabled = true;
-            this.cmbRank.Location = new System.Drawing.Point(397, 231);
+            this.cmbRank.Location = new System.Drawing.Point(398, 231);
             this.cmbRank.Name = "cmbRank";
-            this.cmbRank.Size = new System.Drawing.Size(206, 21);
-            this.cmbRank.TabIndex = 14;
+            this.cmbRank.Size = new System.Drawing.Size(275, 21);
+            this.cmbRank.TabIndex = 15;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(344, 296);
+            this.label9.Location = new System.Drawing.Point(344, 291);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(94, 16);
+            this.label9.Size = new System.Drawing.Size(98, 16);
             this.label9.TabIndex = 124;
-            this.label9.Text = "Quarter Type:";
+            this.label9.Text = "Quarter Type :";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(344, 232);
+            this.label7.Location = new System.Drawing.Point(344, 233);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 16);
+            this.label7.Size = new System.Drawing.Size(48, 16);
             this.label7.TabIndex = 123;
-            this.label7.Text = "Rank:";
+            this.label7.Text = "Rank :";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(344, 263);
+            this.label6.Location = new System.Drawing.Point(344, 261);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 16);
+            this.label6.Size = new System.Drawing.Size(41, 16);
             this.label6.TabIndex = 122;
-            this.label6.Text = "Unit:";
+            this.label6.Text = "Unit :";
             // 
             // txtEmployeeName
             // 
             this.txtEmployeeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtEmployeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmployeeName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmployeeName.Location = new System.Drawing.Point(466, 198);
+            this.txtEmployeeName.Location = new System.Drawing.Point(466, 175);
             this.txtEmployeeName.MaxLength = 100;
             this.txtEmployeeName.Name = "txtEmployeeName";
             this.txtEmployeeName.Size = new System.Drawing.Size(207, 23);
@@ -560,8 +568,8 @@
             this.txtEmployeeID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtEmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmployeeID.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmployeeID.Location = new System.Drawing.Point(442, 167);
-            this.txtEmployeeID.MaxLength = 8;
+            this.txtEmployeeID.Location = new System.Drawing.Point(442, 147);
+            this.txtEmployeeID.MaxLength = 16;
             this.txtEmployeeID.Name = "txtEmployeeID";
             this.txtEmployeeID.Size = new System.Drawing.Size(231, 23);
             this.txtEmployeeID.TabIndex = 12;
@@ -571,27 +579,27 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(344, 203);
+            this.label4.Location = new System.Drawing.Point(344, 178);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 16);
+            this.label4.Size = new System.Drawing.Size(120, 16);
             this.label4.TabIndex = 120;
-            this.label4.Text = "Employee Name:";
+            this.label4.Text = "Employee Name :";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(344, 169);
+            this.label5.Location = new System.Drawing.Point(344, 150);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 16);
+            this.label5.Size = new System.Drawing.Size(96, 16);
             this.label5.TabIndex = 121;
-            this.label5.Text = "Employee ID:";
+            this.label5.Text = "Employee ID :";
             // 
             // txtPurpose
             // 
             this.txtPurpose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtPurpose.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPurpose.Location = new System.Drawing.Point(418, 103);
+            this.txtPurpose.Location = new System.Drawing.Point(418, 86);
             this.txtPurpose.Multiline = true;
             this.txtPurpose.Name = "txtPurpose";
             this.txtPurpose.Size = new System.Drawing.Size(255, 54);
@@ -601,7 +609,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(344, 105);
+            this.label8.Location = new System.Drawing.Point(344, 89);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 16);
             this.label8.TabIndex = 127;
@@ -611,7 +619,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 134);
+            this.label11.Location = new System.Drawing.Point(6, 120);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 16);
             this.label11.TabIndex = 130;
@@ -621,7 +629,7 @@
             // 
             this.txtMobileNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtMobileNo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMobileNo.Location = new System.Drawing.Point(122, 36);
+            this.txtMobileNo.Location = new System.Drawing.Point(122, 32);
             this.txtMobileNo.MaxLength = 10;
             this.txtMobileNo.Name = "txtMobileNo";
             this.txtMobileNo.Size = new System.Drawing.Size(211, 21);
@@ -634,7 +642,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 39);
+            this.label12.Location = new System.Drawing.Point(6, 35);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(113, 16);
             this.label12.TabIndex = 132;
@@ -651,10 +659,67 @@
             "Male",
             "Female",
             "Others"});
-            this.cmbGender.Location = new System.Drawing.Point(95, 132);
+            this.cmbGender.Location = new System.Drawing.Point(95, 117);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(238, 23);
             this.cmbGender.TabIndex = 4;
+            // 
+            // txtVisitedPersonMobile
+            // 
+            this.txtVisitedPersonMobile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtVisitedPersonMobile.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVisitedPersonMobile.Location = new System.Drawing.Point(466, 204);
+            this.txtVisitedPersonMobile.MaxLength = 10;
+            this.txtVisitedPersonMobile.Name = "txtVisitedPersonMobile";
+            this.txtVisitedPersonMobile.Size = new System.Drawing.Size(207, 21);
+            this.txtVisitedPersonMobile.TabIndex = 14;
+            this.txtVisitedPersonMobile.Validating += new System.ComponentModel.CancelEventHandler(this.txtVisitedPersonMobile_Validating);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(344, 206);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(113, 16);
+            this.label13.TabIndex = 135;
+            this.label13.Text = "Mobile Number :";
+            // 
+            // dteValidTill
+            // 
+            this.dteValidTill.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dteValidTill.CustomFormat = "dd-MMM-yyyy  hh:mm tt";
+            this.dteValidTill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dteValidTill.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dteValidTill.Location = new System.Drawing.Point(467, 343);
+            this.dteValidTill.Name = "dteValidTill";
+            this.dteValidTill.Size = new System.Drawing.Size(206, 22);
+            this.dteValidTill.TabIndex = 19;
+            this.dteValidTill.Value = new System.DateTime(2018, 10, 7, 0, 0, 0, 0);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(344, 346);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(72, 16);
+            this.label14.TabIndex = 137;
+            this.label14.Text = "Valid Till :";
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmBlackList});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(124, 26);
+            // 
+            // tsmBlackList
+            // 
+            this.tsmBlackList.Name = "tsmBlackList";
+            this.tsmBlackList.Size = new System.Drawing.Size(123, 22);
+            this.tsmBlackList.Text = "Black List";
+            this.tsmBlackList.Click += new System.EventHandler(this.tsmBlackList_Click);
             // 
             // frmVisitor
             // 
@@ -664,6 +729,11 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(891, 504);
+            this.ContextMenuStrip = this.contextMenuStrip;
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.dteValidTill);
+            this.Controls.Add(this.txtVisitedPersonMobile);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.cmbGender);
             this.Controls.Add(this.txtMobileNo);
             this.Controls.Add(this.label12);
@@ -719,6 +789,7 @@
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picVisitorPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoVisitors)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -780,5 +851,11 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn IdentityType;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdentityNumber;
         private System.Windows.Forms.DataGridViewComboBoxColumn Relationship;
+        private System.Windows.Forms.TextBox txtVisitedPersonMobile;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dteValidTill;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tsmBlackList;
     }
 }

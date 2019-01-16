@@ -40,6 +40,8 @@
             this.mnuVisitorBookVisitorIn = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVisitorBookVisitorOut = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVisitorBookVisitorSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVisitorBookTimeExpiredVisitors = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVisitorBookBlackListedVisitors = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMasters = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMastersStates = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMastersCities = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +56,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.mnuVisitorBookNotExitedVisitorsToday = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -113,7 +116,10 @@
             this.mnuVisitorBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuVisitorBookVisitorIn,
             this.mnuVisitorBookVisitorOut,
-            this.mnuVisitorBookVisitorSearch});
+            this.mnuVisitorBookVisitorSearch,
+            this.mnuVisitorBookTimeExpiredVisitors,
+            this.mnuVisitorBookBlackListedVisitors,
+            this.mnuVisitorBookNotExitedVisitorsToday});
             this.mnuVisitorBook.Name = "mnuVisitorBook";
             this.mnuVisitorBook.Size = new System.Drawing.Size(87, 20);
             this.mnuVisitorBook.Text = "&Visitors Book";
@@ -122,7 +128,7 @@
             // 
             this.mnuVisitorBookVisitorIn.Name = "mnuVisitorBookVisitorIn";
             this.mnuVisitorBookVisitorIn.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuVisitorBookVisitorIn.Size = new System.Drawing.Size(190, 22);
+            this.mnuVisitorBookVisitorIn.Size = new System.Drawing.Size(224, 22);
             this.mnuVisitorBookVisitorIn.Text = "Visitor &In";
             this.mnuVisitorBookVisitorIn.Click += new System.EventHandler(this.mnuVisitorBookVisitorIn_Click);
             // 
@@ -130,7 +136,7 @@
             // 
             this.mnuVisitorBookVisitorOut.Name = "mnuVisitorBookVisitorOut";
             this.mnuVisitorBookVisitorOut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuVisitorBookVisitorOut.Size = new System.Drawing.Size(190, 22);
+            this.mnuVisitorBookVisitorOut.Size = new System.Drawing.Size(224, 22);
             this.mnuVisitorBookVisitorOut.Text = "Visitor &Out";
             this.mnuVisitorBookVisitorOut.Click += new System.EventHandler(this.mnuVisitorBookVisitorOut_Click);
             // 
@@ -138,9 +144,25 @@
             // 
             this.mnuVisitorBookVisitorSearch.Name = "mnuVisitorBookVisitorSearch";
             this.mnuVisitorBookVisitorSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuVisitorBookVisitorSearch.Size = new System.Drawing.Size(190, 22);
+            this.mnuVisitorBookVisitorSearch.Size = new System.Drawing.Size(224, 22);
             this.mnuVisitorBookVisitorSearch.Text = "&Search Visitors";
             this.mnuVisitorBookVisitorSearch.Click += new System.EventHandler(this.mnuVisitorBookVisitorSearch_Click);
+            // 
+            // mnuVisitorBookTimeExpiredVisitors
+            // 
+            this.mnuVisitorBookTimeExpiredVisitors.Name = "mnuVisitorBookTimeExpiredVisitors";
+            this.mnuVisitorBookTimeExpiredVisitors.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.mnuVisitorBookTimeExpiredVisitors.Size = new System.Drawing.Size(224, 22);
+            this.mnuVisitorBookTimeExpiredVisitors.Text = "&Time Expired Visitors";
+            this.mnuVisitorBookTimeExpiredVisitors.Click += new System.EventHandler(this.mnuVisitorBookTimeExpiredVisitors_Click);
+            // 
+            // mnuVisitorBookBlackListedVisitors
+            // 
+            this.mnuVisitorBookBlackListedVisitors.Name = "mnuVisitorBookBlackListedVisitors";
+            this.mnuVisitorBookBlackListedVisitors.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+            this.mnuVisitorBookBlackListedVisitors.Size = new System.Drawing.Size(224, 22);
+            this.mnuVisitorBookBlackListedVisitors.Text = "&Black Listed Visitors";
+            this.mnuVisitorBookBlackListedVisitors.Click += new System.EventHandler(this.mnuVisitorBookBlackListedVisitors_Click);
             // 
             // mnuMasters
             // 
@@ -160,56 +182,56 @@
             // mnuMastersStates
             // 
             this.mnuMastersStates.Name = "mnuMastersStates";
-            this.mnuMastersStates.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersStates.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersStates.Text = "&States";
             this.mnuMastersStates.Click += new System.EventHandler(this.mnuMastersStates_Click);
             // 
             // mnuMastersCities
             // 
             this.mnuMastersCities.Name = "mnuMastersCities";
-            this.mnuMastersCities.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersCities.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersCities.Text = "&Cities";
             this.mnuMastersCities.Click += new System.EventHandler(this.mnuMastersCities_Click);
             // 
             // mnuMastersUsers
             // 
             this.mnuMastersUsers.Name = "mnuMastersUsers";
-            this.mnuMastersUsers.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersUsers.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersUsers.Text = "&Users";
             this.mnuMastersUsers.Click += new System.EventHandler(this.mnuMastersUsers_Click);
             // 
             // mnuMastersIdentityTypes
             // 
             this.mnuMastersIdentityTypes.Name = "mnuMastersIdentityTypes";
-            this.mnuMastersIdentityTypes.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersIdentityTypes.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersIdentityTypes.Text = "&Identity Types";
             this.mnuMastersIdentityTypes.Click += new System.EventHandler(this.mnuMastersIdentityTypes_Click);
             // 
             // mnuMastersRelationships
             // 
             this.mnuMastersRelationships.Name = "mnuMastersRelationships";
-            this.mnuMastersRelationships.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersRelationships.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersRelationships.Text = "&Relationships";
             this.mnuMastersRelationships.Click += new System.EventHandler(this.mnuMastersRelationships_Click);
             // 
             // mnuMastersRanks
             // 
             this.mnuMastersRanks.Name = "mnuMastersRanks";
-            this.mnuMastersRanks.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersRanks.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersRanks.Text = "Ra&nks";
             this.mnuMastersRanks.Click += new System.EventHandler(this.mnuMastersRanks_Click);
             // 
             // mnuMastersUnits
             // 
             this.mnuMastersUnits.Name = "mnuMastersUnits";
-            this.mnuMastersUnits.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersUnits.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersUnits.Text = "Uni&ts";
             this.mnuMastersUnits.Click += new System.EventHandler(this.mnuMastersUnits_Click);
             // 
             // mnuMastersQuarterTypes
             // 
             this.mnuMastersQuarterTypes.Name = "mnuMastersQuarterTypes";
-            this.mnuMastersQuarterTypes.Size = new System.Drawing.Size(152, 22);
+            this.mnuMastersQuarterTypes.Size = new System.Drawing.Size(147, 22);
             this.mnuMastersQuarterTypes.Text = "&Quarter Types";
             this.mnuMastersQuarterTypes.Click += new System.EventHandler(this.mnuMastersQuarterTypes_Click);
             // 
@@ -246,6 +268,13 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
+            // 
+            // mnuVisitorBookNotExitedVisitorsToday
+            // 
+            this.mnuVisitorBookNotExitedVisitorsToday.Name = "mnuVisitorBookNotExitedVisitorsToday";
+            this.mnuVisitorBookNotExitedVisitorsToday.Size = new System.Drawing.Size(224, 22);
+            this.mnuVisitorBookNotExitedVisitorsToday.Text = "Not Exited Visitors Today";
+            this.mnuVisitorBookNotExitedVisitorsToday.Click += new System.EventHandler(this.mnuVisitorBookNotExitedVisitorsToday_Click);
             // 
             // frmMainPage
             // 
@@ -300,6 +329,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuVisitorBookVisitorSearch;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpAbout;
+        private System.Windows.Forms.ToolStripMenuItem mnuVisitorBookTimeExpiredVisitors;
+        private System.Windows.Forms.ToolStripMenuItem mnuVisitorBookBlackListedVisitors;
+        private System.Windows.Forms.ToolStripMenuItem mnuVisitorBookNotExitedVisitorsToday;
     }
 }
 

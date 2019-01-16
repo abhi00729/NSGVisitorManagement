@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Net;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace NSGVisitorManagement.Classes
 {
@@ -33,7 +34,9 @@ namespace NSGVisitorManagement.Classes
         private static string loggedInUserRank;
         private static string loggedInUserUnit;
         private static string printerName;
-        
+        private static int defaultPassValidHours;
+        private static int maxSearchRows;
+
         public static string MachineName
         {
             get
@@ -135,12 +138,64 @@ namespace NSGVisitorManagement.Classes
             get
             {
                 return printerName;
-                //return @"\\" + Environment.MachineName + @"\POS58";
             }
             set
             {
                 printerName = value;
             }
+        }
+
+        public static int DefaultPassValidHours
+        {
+            get
+            {
+                return defaultPassValidHours;
+            }
+            set
+            {
+                defaultPassValidHours = value;
+            }
+        }
+
+        public static int MaxSearchRows
+        {
+            get
+            {
+                return maxSearchRows;
+            }
+            set
+            {
+                maxSearchRows = value;
+            }
+        }
+
+        public static DataTable ConvertToDataTable<T>(IList<T> data, bool treatEmptyStringAsNull = false)
+        {
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+
+            foreach (PropertyDescriptor prop in properties)
+            {
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                {
+                    if (prop.PropertyType == typeof(string) && treatEmptyStringAsNull)
+                    {
+                        row[prop.Name] = (prop.GetValue(item).ToString() == string.Empty ? DBNull.Value : prop.GetValue(item));
+                    }
+                    else
+                    {
+                        row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                    }
+                }
+                table.Rows.Add(row);
+            }
+            return table;
         }
     }
 }

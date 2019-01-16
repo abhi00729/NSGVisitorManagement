@@ -185,7 +185,7 @@ namespace NSGVisitorManagement
 
         private void txtEmployeeID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Validation.ValidateTextIsNumeric(txtEmployeeID, e, false);
+            //Validation.ValidateTextIsNumeric(txtEmployeeID, e, false);
         }
 
         private void txtFirstName_KeyPress(object sender, KeyPressEventArgs e)

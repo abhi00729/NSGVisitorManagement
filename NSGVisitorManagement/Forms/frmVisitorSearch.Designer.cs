@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVisitorSearch));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtMobileNo = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtVisitedPerson = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.chkExitDate = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dteEntryDateTo = new System.Windows.Forms.DateTimePicker();
@@ -50,8 +54,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtVisitedPerson = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdVisitorDetails)).BeginInit();
@@ -63,6 +65,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.txtMobileNo);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtVisitedPerson);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.chkExitDate);
@@ -77,14 +81,55 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(749, 75);
+            this.panel1.Size = new System.Drawing.Size(844, 75);
             this.panel1.TabIndex = 0;
+            // 
+            // txtMobileNo
+            // 
+            this.txtMobileNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtMobileNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMobileNo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMobileNo.Location = new System.Drawing.Point(603, 43);
+            this.txtMobileNo.MaxLength = 15;
+            this.txtMobileNo.Name = "txtMobileNo";
+            this.txtMobileNo.Size = new System.Drawing.Size(134, 23);
+            this.txtMobileNo.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(534, 46);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 17);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Mobile No:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtVisitedPerson
+            // 
+            this.txtVisitedPerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtVisitedPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtVisitedPerson.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVisitedPerson.Location = new System.Drawing.Point(375, 43);
+            this.txtVisitedPerson.Name = "txtVisitedPerson";
+            this.txtVisitedPerson.Size = new System.Drawing.Size(153, 23);
+            this.txtVisitedPerson.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(248, 46);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(126, 17);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Visited Person Name:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // chkExitDate
             // 
             this.chkExitDate.AutoSize = true;
             this.chkExitDate.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkExitDate.Location = new System.Drawing.Point(537, 46);
+            this.chkExitDate.Location = new System.Drawing.Point(728, 9);
             this.chkExitDate.Name = "chkExitDate";
             this.chkExitDate.Size = new System.Drawing.Size(109, 18);
             this.chkExitDate.TabIndex = 5;
@@ -96,7 +141,7 @@
             // 
             this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(647, 42);
+            this.btnSearch.Location = new System.Drawing.Point(744, 43);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(93, 23);
             this.btnSearch.TabIndex = 4;
@@ -110,9 +155,9 @@
             this.dteEntryDateTo.CustomFormat = "dd-MMM-yyyy";
             this.dteEntryDateTo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dteEntryDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteEntryDateTo.Location = new System.Drawing.Point(357, 7);
+            this.dteEntryDateTo.Location = new System.Drawing.Point(310, 7);
             this.dteEntryDateTo.Name = "dteEntryDateTo";
-            this.dteEntryDateTo.Size = new System.Drawing.Size(132, 23);
+            this.dteEntryDateTo.Size = new System.Drawing.Size(111, 23);
             this.dteEntryDateTo.TabIndex = 1;
             // 
             // dteEntryDateFrom
@@ -121,15 +166,15 @@
             this.dteEntryDateFrom.CustomFormat = "dd-MMM-yyyy";
             this.dteEntryDateFrom.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dteEntryDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteEntryDateFrom.Location = new System.Drawing.Point(112, 7);
+            this.dteEntryDateFrom.Location = new System.Drawing.Point(107, 7);
             this.dteEntryDateFrom.Name = "dteEntryDateFrom";
-            this.dteEntryDateFrom.Size = new System.Drawing.Size(132, 23);
+            this.dteEntryDateFrom.Size = new System.Drawing.Size(111, 23);
             this.dteEntryDateFrom.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(266, 10);
+            this.label3.Location = new System.Drawing.Point(224, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 17);
             this.label3.TabIndex = 4;
@@ -151,7 +196,7 @@
             this.txtVisitorName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtVisitorName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtVisitorName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVisitorName.Location = new System.Drawing.Point(91, 42);
+            this.txtVisitorName.Location = new System.Drawing.Point(91, 43);
             this.txtVisitorName.Name = "txtVisitorName";
             this.txtVisitorName.Size = new System.Drawing.Size(153, 23);
             this.txtVisitorName.TabIndex = 3;
@@ -172,16 +217,16 @@
             this.txtVisitorNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtVisitorNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtVisitorNumber.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVisitorNumber.Location = new System.Drawing.Point(623, 7);
+            this.txtVisitorNumber.Location = new System.Drawing.Point(528, 7);
             this.txtVisitorNumber.Name = "txtVisitorNumber";
-            this.txtVisitorNumber.Size = new System.Drawing.Size(117, 23);
+            this.txtVisitorNumber.Size = new System.Drawing.Size(151, 23);
             this.txtVisitorNumber.TabIndex = 2;
             this.txtVisitorNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAppNo_KeyPress);
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(521, 10);
+            this.label1.Location = new System.Drawing.Point(430, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 3;
@@ -197,7 +242,7 @@
             this.panel2.Controls.Add(this.grdVisitorDetails);
             this.panel2.Location = new System.Drawing.Point(12, 82);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(749, 293);
+            this.panel2.Size = new System.Drawing.Size(844, 293);
             this.panel2.TabIndex = 1;
             // 
             // grdVisitorDetails
@@ -215,7 +260,7 @@
             this.grdVisitorDetails.Name = "grdVisitorDetails";
             this.grdVisitorDetails.ReadOnly = true;
             this.grdVisitorDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdVisitorDetails.Size = new System.Drawing.Size(735, 278);
+            this.grdVisitorDetails.Size = new System.Drawing.Size(830, 278);
             this.grdVisitorDetails.TabIndex = 0;
             // 
             // panel3
@@ -230,7 +275,7 @@
             this.panel3.Controls.Add(this.btnAdd);
             this.panel3.Location = new System.Drawing.Point(12, 382);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(749, 37);
+            this.panel3.Size = new System.Drawing.Size(844, 37);
             this.panel3.TabIndex = 2;
             // 
             // btnExcelExport
@@ -257,7 +302,7 @@
             this.lblTotalRecordCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblTotalRecordCount.Location = new System.Drawing.Point(88, 5);
             this.lblTotalRecordCount.Name = "lblTotalRecordCount";
-            this.lblTotalRecordCount.Size = new System.Drawing.Size(394, 23);
+            this.lblTotalRecordCount.Size = new System.Drawing.Size(489, 23);
             this.lblTotalRecordCount.TabIndex = 9;
             this.lblTotalRecordCount.Text = "#";
             this.lblTotalRecordCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -268,7 +313,7 @@
             this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(667, 5);
+            this.btnClose.Location = new System.Drawing.Point(762, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 2;
@@ -281,7 +326,7 @@
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(578, 5);
+            this.btnEdit.Location = new System.Drawing.Point(673, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 1;
@@ -294,33 +339,13 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(488, 5);
+            this.btnAdd.Location = new System.Drawing.Point(583, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // txtVisitedPerson
-            // 
-            this.txtVisitedPerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtVisitedPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtVisitedPerson.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVisitedPerson.Location = new System.Drawing.Point(375, 42);
-            this.txtVisitedPerson.Name = "txtVisitedPerson";
-            this.txtVisitedPerson.Size = new System.Drawing.Size(153, 23);
-            this.txtVisitedPerson.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(248, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 17);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Visited Person Name:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // frmVisitorSearch
             // 
@@ -330,7 +355,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(770, 425);
+            this.ClientSize = new System.Drawing.Size(865, 425);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -373,5 +398,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txtVisitedPerson;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtMobileNo;
+        private System.Windows.Forms.Label label6;
     }
 }

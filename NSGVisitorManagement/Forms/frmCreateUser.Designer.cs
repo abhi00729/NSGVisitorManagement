@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCreateUser));
             this.grpboxEntry = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.radMale = new System.Windows.Forms.RadioButton();
+            this.radFemale = new System.Windows.Forms.RadioButton();
             this.chkEmpActive = new System.Windows.Forms.CheckBox();
             this.chkCreateLogin = new System.Windows.Forms.CheckBox();
             this.grpBoxLoginDetails = new System.Windows.Forms.GroupBox();
@@ -63,9 +66,6 @@
             this.errUnit = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.radMale = new System.Windows.Forms.RadioButton();
-            this.radFemale = new System.Windows.Forms.RadioButton();
-            this.label11 = new System.Windows.Forms.Label();
             this.grpboxEntry.SuspendLayout();
             this.grpBoxLoginDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoCreateUser)).BeginInit();
@@ -103,6 +103,42 @@
             this.grpboxEntry.Size = new System.Drawing.Size(340, 424);
             this.grpboxEntry.TabIndex = 0;
             this.grpboxEntry.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(5, 108);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 15);
+            this.label11.TabIndex = 119;
+            this.label11.Text = "Gender:";
+            // 
+            // radMale
+            // 
+            this.radMale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radMale.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radMale.Location = new System.Drawing.Point(125, 103);
+            this.radMale.Name = "radMale";
+            this.radMale.Size = new System.Drawing.Size(61, 24);
+            this.radMale.TabIndex = 3;
+            this.radMale.TabStop = true;
+            this.radMale.Text = "Male";
+            this.radMale.UseVisualStyleBackColor = false;
+            // 
+            // radFemale
+            // 
+            this.radFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.radFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radFemale.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radFemale.Location = new System.Drawing.Point(190, 103);
+            this.radFemale.Name = "radFemale";
+            this.radFemale.Size = new System.Drawing.Size(72, 24);
+            this.radFemale.TabIndex = 4;
+            this.radFemale.TabStop = true;
+            this.radFemale.Text = "Female";
+            this.radFemale.UseVisualStyleBackColor = false;
             // 
             // chkEmpActive
             // 
@@ -355,7 +391,7 @@
             this.txtEmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmployeeID.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmployeeID.Location = new System.Drawing.Point(125, 16);
-            this.txtEmployeeID.MaxLength = 8;
+            this.txtEmployeeID.MaxLength = 16;
             this.txtEmployeeID.Name = "txtEmployeeID";
             this.txtEmployeeID.Size = new System.Drawing.Size(191, 23);
             this.txtEmployeeID.TabIndex = 0;
@@ -454,42 +490,6 @@
             this.btnCreate.Text = "&Create";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // radMale
-            // 
-            this.radMale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radMale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radMale.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radMale.Location = new System.Drawing.Point(125, 103);
-            this.radMale.Name = "radMale";
-            this.radMale.Size = new System.Drawing.Size(61, 24);
-            this.radMale.TabIndex = 3;
-            this.radMale.TabStop = true;
-            this.radMale.Text = "Male";
-            this.radMale.UseVisualStyleBackColor = false;
-            // 
-            // radFemale
-            // 
-            this.radFemale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radFemale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radFemale.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radFemale.Location = new System.Drawing.Point(190, 103);
-            this.radFemale.Name = "radFemale";
-            this.radFemale.Size = new System.Drawing.Size(72, 24);
-            this.radFemale.TabIndex = 4;
-            this.radFemale.TabStop = true;
-            this.radFemale.Text = "Female";
-            this.radFemale.UseVisualStyleBackColor = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(5, 108);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 15);
-            this.label11.TabIndex = 119;
-            this.label11.Text = "Gender:";
             // 
             // frmCreateUser
             // 

@@ -26,6 +26,7 @@ namespace NSGVisitorManagement.Forms
 
         Visitor visitor;
         NSGEmployee nsgEmployee;
+        BlackListedVisitor blackListedVisitor;
         List<CoVisitor> coVisitors = new List<CoVisitor>();
         List<CoVisitor> coVisitorsRemoved = new List<CoVisitor>();
 
@@ -48,7 +49,7 @@ namespace NSGVisitorManagement.Forms
             isNewEntry = newEntry;
         }
 
-        public frmVisitor(int visitorID, bool editEntry = false)
+        public frmVisitor(long visitorID, bool editEntry = false)
         {
             InitializeComponent();
             this.visitorID = visitorID;
@@ -91,6 +92,8 @@ namespace NSGVisitorManagement.Forms
                 txtVisitorNumber.ReadOnly = true;
                 btnPrint.Enabled = false;
                 txtMobileNo.Focus();
+                dteValidTill.Value = DateTime.Now.AddHours(GlobalClass.DefaultPassValidHours);
+                this.contextMenuStrip.Enabled = false;
             }
             else if (isEditEntry)
             {
@@ -272,6 +275,15 @@ namespace NSGVisitorManagement.Forms
             }
         }
 
+        private void txtVisitedPersonMobile_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Validation.ValidateTextIsNumeric(txtVisitedPersonMobile))
+            {
+                MessageBox.Show("Please enter only numeric in Visited Person Mobile Number.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Cancel = true;
+            }
+        }
+
         private void btnEnter_Click(object sender, EventArgs e)
         {
             try
@@ -320,6 +332,9 @@ namespace NSGVisitorManagement.Forms
                 visitor.PersonEmpCode = txtEmployeeID.Text;
                 visitor.PersonName = txtEmployeeName.Text;
 
+                visitor.VisitedPersonMobile = txtVisitedPersonMobile.Text;
+                visitor.ValidTill = dteValidTill.Value;
+
                 if (cmbRank.SelectedIndex != -1)
                 {
                     visitor.RankID = int.Parse(cmbRank.SelectedValue.ToString());
@@ -339,7 +354,7 @@ namespace NSGVisitorManagement.Forms
                 {
                     visitor.QuarterNumber = int.Parse(txtQuarterNumber.Text);
                 }
-
+                
                 byte[] visitorImage = (byte[])imgConverter.ConvertTo(picVisitorPhoto.Image, typeof(byte[]));
                 visitor.VisitorPhoto = visitorImage;
 
@@ -352,7 +367,7 @@ namespace NSGVisitorManagement.Forms
                 {
                     nsgEmployee = new NSGEmployee();
                     nsgEmployee.NSGEmployeeCode = txtEmployeeID.Text;
-                    nsgEmployee.FirstName = txtFirstName.Text;
+                    nsgEmployee.FirstName = txtEmployeeName.Text;
                     nsgEmployee.Gender = "Male";
                     nsgEmployee.RankID = int.Parse(cmbRank.SelectedValue.ToString());
                     nsgEmployee.UnitID = int.Parse(cmbUnit.SelectedValue.ToString());
@@ -571,14 +586,23 @@ namespace NSGVisitorManagement.Forms
                 }
             }
 
+            if(dteValidTill.Value <= DateTime.Parse(txtEntryTime.Text))
+            {
+                MessageBox.Show("Pass validity should be greater than current date and time.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dataIsValid = false;
+            }
+
+            if (txtVisitedPersonMobile.Text.Length > 0 && txtVisitedPersonMobile.Text.Length < 10)
+            {
+                MessageBox.Show("Please enter valid Mobile Number for Visited Person.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dataIsValid = false;
+            }
+
             return dataIsValid;
         }
 
         private void visitorTimer_Tick(object sender, EventArgs e)
         {
-            //txtEntryTime.Text = string.Empty;
-            //txtExitTime.Text = string.Empty;
-
             if (isNewEntry)
             {
                 txtEntryTime.Text = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
@@ -632,6 +656,16 @@ namespace NSGVisitorManagement.Forms
             txtVisitorAddress.Text = visitor.VisitorAddress;
             cmbState.SelectedValue = visitor.StateID;
 
+            if(visitor.VisitedPersonMobile != null)
+            {
+                txtVisitedPersonMobile.Text = visitor.VisitedPersonMobile;
+            }
+            
+            if(visitor.ValidTill != null)
+            {
+                dteValidTill.Value = DateTime.Parse(visitor.ValidTill.ToString());
+            }
+            
             if (visitor.CityID != null)
             {
                 cmbCity.SelectedValue = visitor.CityID;
@@ -709,6 +743,7 @@ namespace NSGVisitorManagement.Forms
                     txtPurpose.Text = string.Empty;
                     txtEmployeeID.Text = string.Empty;
                     txtEmployeeName.Text = string.Empty;
+                    txtVisitedPersonMobile.Text = string.Empty;
                     cmbRank.SelectedIndex = -1;
                     cmbUnit.SelectedIndex = -1;
                     cmbQuarterType.SelectedIndex = -1;
@@ -716,6 +751,8 @@ namespace NSGVisitorManagement.Forms
                     dgvCoVisitors.Rows.Clear();
                     picVisitorPhoto.Image = null;
                 }
+
+                dteValidTill.Value = DateTime.Now.AddHours(GlobalClass.DefaultPassValidHours);
 
                 btnPrint.Enabled = false;
                 isNewEntry = true;
@@ -746,10 +783,12 @@ namespace NSGVisitorManagement.Forms
                     txtPurpose.ReadOnly = true;
                     txtEmployeeID.ReadOnly = true;
                     txtEmployeeName.ReadOnly = true;
+                    txtVisitedPersonMobile.ReadOnly = true;
                     cmbRank.Enabled = false;
                     cmbUnit.Enabled = false;
                     cmbQuarterType.Enabled = false;
                     txtQuarterNumber.ReadOnly = true;
+                    dteValidTill.Enabled = false;
                     dgvCoVisitors.Enabled = false;
                 }
 
@@ -867,6 +906,7 @@ namespace NSGVisitorManagement.Forms
             bw.LargeText("-----------------------------");
             bw.NormalFont("Visitor #: " + visitor.VisitorID.ToString(), true);
             bw.NormalFont(" In Time : " + txtEntryTime.Text, true);
+            bw.NormalFont(" Valid Till : " + dteValidTill.Text, true);
             bw.FeedLines(1);
             bw.NormalFont("Name: " + visitor.FirstName + " " + visitor.LastName, true);
             bw.NormalFont("Address: " + visitor.VisitorAddress, true);
@@ -901,12 +941,60 @@ namespace NSGVisitorManagement.Forms
             if (isNewEntry && !string.IsNullOrEmpty(txtMobileNo.Text.TrimEnd()))
             {
                 visitor = DB.Visitors.Where(v => v.MobileNo == txtMobileNo.Text).OrderByDescending(v => v.EntryDate).FirstOrDefault();
-
+                
                 if(visitor != null)
                 {
                     isExistingVisitor = true;
                     LoadData();
                 }
+                
+                blackListedVisitor = DB.BlackListedVisitors.Where(blv => blv.MobileNo == txtMobileNo.Text).FirstOrDefault();
+
+                if(blackListedVisitor != null && blackListedVisitor.IsBlackListed)
+                {
+                    MessageBox.Show("This person has been Black Listed.\nVisitor Pass can not be issued to this person.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnEnter.Enabled = false;
+                }
+            }
+        }
+        
+        private void tsmBlackList_Click(object sender, EventArgs e)
+        {
+            frmBlackListVisitor blackListForm;
+
+            if(blackListedVisitor != null)
+            {
+                blackListForm = new frmBlackListVisitor(blackListedVisitor);
+            }
+            else
+            {
+                blackListForm = new frmBlackListVisitor(visitorID, visitor.MobileNo);
+            }
+
+            //blackListForm.Parent = this;
+
+            var blackListResult = blackListForm.ShowDialog();
+
+            if(blackListResult == DialogResult.OK)
+            {
+                var dialogResult = MessageBox.Show("This visitor has been Black Listed successfully.\nDo you want to close the form and continue?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    btnCancel_Click(null, null);
+                    return;
+                }
+                
+                btnEnter.Enabled = false;
+            }
+
+        }
+
+        private void cmbQuarterType_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                cmbQuarterType.SelectedIndex = -1;
             }
         }
     }

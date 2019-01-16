@@ -17,8 +17,8 @@ namespace NSGVisitorManagement.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CoreIdentityType()
         {
-            this.Visitors = new HashSet<Visitor>();
             this.CoVisitors = new HashSet<CoVisitor>();
+            this.Visitors = new HashSet<Visitor>();
         }
     
         public int IdentityTypeID { get; set; }
@@ -32,8 +32,8 @@ namespace NSGVisitorManagement.DAL
         public virtual CoreUser CoreUser { get; set; }
         public virtual CoreUser CoreUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Visitor> Visitors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoVisitor> CoVisitors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visitor> Visitors { get; set; }
     }
 }

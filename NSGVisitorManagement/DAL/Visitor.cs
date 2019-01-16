@@ -18,6 +18,7 @@ namespace NSGVisitorManagement.DAL
         public Visitor()
         {
             this.CoVisitors = new HashSet<CoVisitor>();
+            this.BlackListedVisitors = new HashSet<BlackListedVisitor>();
         }
     
         public long VisitorID { get; set; }
@@ -46,6 +47,8 @@ namespace NSGVisitorManagement.DAL
         public System.DateTime EntryDate { get; set; }
         public Nullable<int> UpdateUserID { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string VisitedPersonMobile { get; set; }
+        public Nullable<System.DateTime> ValidTill { get; set; }
     
         public virtual CoreCity CoreCity { get; set; }
         public virtual CoreIdentityType CoreIdentityType { get; set; }
@@ -57,5 +60,7 @@ namespace NSGVisitorManagement.DAL
         public virtual CoreUser CoreUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoVisitor> CoVisitors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BlackListedVisitor> BlackListedVisitors { get; set; }
     }
 }

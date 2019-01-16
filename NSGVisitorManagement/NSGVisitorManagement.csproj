@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\MyProjects\NSGVisitorManagement\Publish\</PublishUrl>
+    <PublishUrl>E:\MyProjects\Repos\NSGVisitorManagement\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,8 +28,8 @@
     <PublisherName>Mrida Systems and Technology</PublisherName>
     <SuiteName>NSG Visitor Management</SuiteName>
     <DisallowUrlActivation>true</DisallowUrlActivation>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -65,7 +65,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>3A9DC12696D60A9C986DF2E295040A249FAD13DA</ManifestCertificateThumbprint>
@@ -116,8 +116,13 @@
     <Compile Include="Classes\GlobalClass.cs" />
     <Compile Include="Classes\PrintDirect.cs" />
     <Compile Include="Classes\Validation.cs" />
-    <Compile Include="Classes\VisitorDetails.cs" />
     <Compile Include="Classes\WebCamera.cs" />
+    <Compile Include="DAL\BlackListedVisitor.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\BlackListedVisitorDetailsGet_Result.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\CoreCity.cs">
       <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
     </Compile>
@@ -148,6 +153,9 @@
     <Compile Include="DAL\ErrorLog.cs">
       <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\GetNotExitedVisitorsForTheDate_Result.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\NSGEmployee.cs">
       <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
     </Compile>
@@ -166,11 +174,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\TimeExpiredVisitorDetailsGet_Result.cs">
+      <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Visitor.cs">
       <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\VisitorsDetailsGet_Result.cs">
       <DependentUpon>NSGVisitorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBlackListVisitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBlackListVisitor.Designer.cs">
+      <DependentUpon>frmBlackListVisitor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmAbout.cs">
       <SubType>Form</SubType>
@@ -196,6 +213,12 @@
     <Compile Include="Forms\frmCreateUser.Designer.cs">
       <DependentUpon>frmCreateUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmExportNotExitedVisitors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmExportNotExitedVisitors.Designer.cs">
+      <DependentUpon>frmExportNotExitedVisitors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +237,18 @@
     </Compile>
     <Compile Include="Forms\frmMasterList.Designer.cs">
       <DependentUpon>frmMasterList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBlackListedVisitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBlackListedVisitor.Designer.cs">
+      <DependentUpon>frmBlackListedVisitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTimeExpiredVisitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTimeExpiredVisitor.Designer.cs">
+      <DependentUpon>frmTimeExpiredVisitor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmVisitorSearch.cs">
       <SubType>Form</SubType>
@@ -235,6 +270,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Forms\frmBlackListVisitor.resx">
+      <DependentUpon>frmBlackListVisitor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -247,6 +285,9 @@
     <EmbeddedResource Include="Forms\frmCreateUser.resx">
       <DependentUpon>frmCreateUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmExportNotExitedVisitors.resx">
+      <DependentUpon>frmExportNotExitedVisitors.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,14 +297,20 @@
     <EmbeddedResource Include="Forms\frmMasterList.resx">
       <DependentUpon>frmMasterList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmVisitorSearch.resx">
-      <DependentUpon>frmVisitorSearch.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmBlackListedVisitor.resx">
+      <DependentUpon>frmBlackListedVisitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmVisitor.resx">
       <DependentUpon>frmVisitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMastersListEdit.resx">
       <DependentUpon>frmMastersListEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTimeExpiredVisitor.resx">
+      <DependentUpon>frmTimeExpiredVisitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmVisitorSearch.resx">
+      <DependentUpon>frmVisitorSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -282,7 +329,6 @@
     <None Include="DAL\NSGVisitorDBModel.edmx.diagram">
       <DependentUpon>NSGVisitorDBModel.edmx</DependentUpon>
     </None>
-    <None Include="NSGVisitorManagement_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

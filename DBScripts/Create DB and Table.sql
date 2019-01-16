@@ -183,6 +183,13 @@ BEGIN
 	)
 END
 
+IF NOT EXISTS(SELECT 1 FROM sys.tables (NOLOCK) t INNER JOIN sys.columns c ON c.object_id = t.object_id WHERE t.name = 'Visitor' AND c.name = 'VisitedPersonMobile')
+BEGIN
+	ALTER TABLE dbo.Visitor
+	ADD VisitedPersonMobile VARCHAR(15) NULL,
+		ValidTill DATETIME NULL
+END
+
 
 IF NOT EXISTS(SELECT 1 FROM sys.tables (NOLOCK) WHERE name = 'CoVisitor')
 BEGIN
@@ -219,6 +226,23 @@ BEGIN
 	)
 END
 GO
+
+IF NOT EXISTS(SELECT NAME FROM sys.tables WHERE name ='BlackListedVisitor')
+BEGIN
+	CREATE TABLE dbo.BlackListedVisitor
+	(
+		BlackListedVisitorID INT IDENTITY NOT NULL PRIMARY KEY,
+		VisitorID BIGINT NOT NULL CONSTRAINT FK_BlackListedVisitor_VisitorID_Visitor_VisitorID FOREIGN KEY REFERENCES dbo.Visitor(VisitorID),
+		MobileNo VARCHAR(15) NULL,
+		IsBlackListed BIT NOT NULL CONSTRAINT DF_BlackListedVisitor_IsBlackListed DEFAULT(1),
+		Reason VARCHAR(5000) NOT NULL,
+		EntryUserID INT NOT NULL CONSTRAINT FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID FOREIGN KEY REFERENCES dbo.CoreUser(CoreUserID),
+		EntryDate DATETIME NOT NULL CONSTRAINT DF_BlackListedVisitor_EntryDate DEFAULT(GETDATE()),
+		UpdateUserID INT NULL CONSTRAINT FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID FOREIGN KEY REFERENCES dbo.CoreUser(CoreUserID),
+		UpdateDate DATETIME NULL
+	)
+END
+
 
 IF NOT EXISTS(SELECT 1 FROM dbo.CoreUser (NOLOCK) CU WHERE CU.UserName = 'NSGAdmin')
 BEGIN
@@ -259,41 +283,46 @@ BEGIN
 END
 
 
-IF NOT EXISTS(SELECT 1 FROM dbo.CoreCity (NOLOCK))
-BEGIN
-	DECLARE @ID INT,
-			@state VARCHAR(500),
-			@stateId INT,
-			@city VARCHAR(500),
-			@cityId INT
-	
-	SELECT TOP 1 @ID = ID, @state = StateName, @city = CityName FROM IndianStatesAndCities WHERE Used = 0
-	
-	WHILE(@ID IS NOT NULL)
-	BEGIN
-		SELECT @stateId = CS.StateID FROM dbo.CoreState (NOLOCK) CS WHERE CS.StateName = @state
+--UPDATE dbo.Visitor
+--SET ValidTill = CASE WHEN OutTime IS NOT NULL THEN OutTime ELSE DATEADD(HOUR, 8, InTime) END
+--WHERE ValidTill IS NULL
 
-		IF(@stateId IS NULL)
-		BEGIN
-			INSERT INTO dbo.CoreState(StateName, EntryUserID)
-			VALUES  ( @state, 1)
-			SELECT @stateId = CS.StateID FROM dbo.CoreState (NOLOCK) CS WHERE CS.StateName = @state
-		END
+
+--IF NOT EXISTS(SELECT 1 FROM dbo.CoreCity (NOLOCK))
+--BEGIN
+--	DECLARE @ID INT,
+--			@state VARCHAR(500),
+--			@stateId INT,
+--			@city VARCHAR(500),
+--			@cityId INT
+	
+--	SELECT TOP 1 @ID = ID, @state = StateName, @city = CityName FROM IndianStatesAndCities WHERE Used = 0
+	
+--	WHILE(@ID IS NOT NULL)
+--	BEGIN
+--		SELECT @stateId = CS.StateID FROM dbo.CoreState (NOLOCK) CS WHERE CS.StateName = @state
+
+--		IF(@stateId IS NULL)
+--		BEGIN
+--			INSERT INTO dbo.CoreState(StateName, EntryUserID)
+--			VALUES  ( @state, 1)
+--			SELECT @stateId = CS.StateID FROM dbo.CoreState (NOLOCK) CS WHERE CS.StateName = @state
+--		END
     
-		SELECT @cityId = CC.CityID FROM dbo.CoreCity (NOLOCK) CC WHERE CC.StateID = @stateId AND CC.CityName = @city
+--		SELECT @cityId = CC.CityID FROM dbo.CoreCity (NOLOCK) CC WHERE CC.StateID = @stateId AND CC.CityName = @city
 
-		IF(@cityId IS NULL)
-		BEGIN
-			INSERT INTO dbo.CoreCity(StateID, CityName, EntryUserID)
-			VALUES (@stateId, @city, 1)
-		END
+--		IF(@cityId IS NULL)
+--		BEGIN
+--			INSERT INTO dbo.CoreCity(StateID, CityName, EntryUserID)
+--			VALUES (@stateId, @city, 1)
+--		END
 
-		UPDATE IndianStatesAndCities SET Used = 1 WHERE ID = @ID
+--		UPDATE IndianStatesAndCities SET Used = 1 WHERE ID = @ID
 
-		SELECT @ID = NULL, @state = NULL, @stateId = NULL, @city = NULL, @cityId = NULL
+--		SELECT @ID = NULL, @state = NULL, @stateId = NULL, @city = NULL, @cityId = NULL
 
-		SELECT TOP 1 @ID = ID, @state = StateName, @city = CityName FROM IndianStatesAndCities WHERE Used = 0
-	END
-END
+--		SELECT TOP 1 @ID = ID, @state = StateName, @city = CityName FROM IndianStatesAndCities WHERE Used = 0
+--	END
+--END
 
-select * from sys.tables
+--select * from sys.tables

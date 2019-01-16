@@ -101,26 +101,26 @@ namespace NSGVisitorManagement.Forms
 
         private void PopulateUsers()
         {
-            var employees = (from emp in DB.NSGEmployees
+            var employees = (from usr in DB.CoreUsers
+                             join emp in DB.NSGEmployees on usr.EmployeeID equals emp.NSGEmployeeCode
                              join cr in DB.CoreRanks on emp.RankID equals cr.RankID
                              join cu in DB.CoreUnits on emp.UnitID equals cu.UnitID
-                             join qt in DB.CoreQuarterTypes on emp.QuarterTypeID equals qt.QuarterTypeID into tmpqt from cqt in tmpqt.DefaultIfEmpty()
-                             join usr in DB.CoreUsers on emp.NSGEmployeeCode equals usr.EmployeeID into tmpUser from cusr in tmpUser.DefaultIfEmpty()
+                             join qt in DB.CoreQuarterTypes on emp.QuarterTypeID equals qt.QuarterTypeID
                              select new
                              {
-                                 emp.NSGEmployeeID,
-                                 emp.NSGEmployeeCode,
-                                 EmployeeName = emp.FirstName + " " +emp.LastName,
+                                 usr.CoreUserID,
+                                 usr.EmployeeID,
+                                 EmployeeName = usr.FirstName + " " + usr.LastName,
                                  emp.Gender,
                                  cr.RankName,
                                  cu.UnitName,
-                                 cqt.QuarterTypeName,
+                                 qt.QuarterTypeName,
                                  emp.QuarterNumber,
                                  EmployeeActive = emp.IsActive,
-                                 UserName = cusr.UserName,
-                                 UserActive = (cusr != null ? cusr.IsActive : false)
-                             }).OrderBy(e => e.EmployeeName);
-
+                                 usr.UserName,
+                                 UserActive = usr.IsActive
+                             }).OrderBy(u => u.EmployeeName);
+                             
             dgvMasterList.DataSource = employees.ToList();
         }
 

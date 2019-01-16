@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NSGVisitorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlackListedVisitor">
+          <Key>
+            <PropertyRef Name="BlackListedVisitorID" />
+          </Key>
+          <Property Name="BlackListedVisitorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitorID" Type="bigint" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="15" />
+          <Property Name="IsBlackListed" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="EntryUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="CoreCity">
           <Key>
             <PropertyRef Name="CityID" />
@@ -182,7 +196,45 @@
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="UpdateUserID" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="VisitedPersonMobile" Type="varchar" MaxLength="15" />
+          <Property Name="ValidTill" Type="datetime" />
         </EntityType>
+        <Association Name="FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
+          <End Role="BlackListedVisitor" Type="Self.BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="0..1" />
+          <End Role="BlackListedVisitor" Type="Self.BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlackListedVisitor_VisitorID_Visitor_VisitorID">
+          <End Role="Visitor" Type="Self.Visitor" Multiplicity="1" />
+          <End Role="BlackListedVisitor" Type="Self.BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitor">
+              <PropertyRef Name="VisitorID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="VisitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
           <End Role="CoreUser" Type="Self.CoreUser" Multiplicity="1" />
           <End Role="CoreCity" Type="Self.CoreCity" Multiplicity="*" />
@@ -579,6 +631,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BlackListedVisitorDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="VisitorName" Type="varchar" Mode="In" />
+          <Parameter Name="VisiedPerson" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="UnListed" Type="bit" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetNotExitedVisitorsForTheDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ForDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="TimeExpiredVisitorDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+          <Parameter Name="VisitorID" Type="bigint" Mode="In" />
+          <Parameter Name="VisitorName" Type="varchar" Mode="In" />
+          <Parameter Name="VisiedPerson" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="IncludeExited" Type="bit" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
+        </Function>
         <Function Name="VisitorsDetailsGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
@@ -586,8 +660,11 @@
           <Parameter Name="VisitorName" Type="varchar" Mode="In" />
           <Parameter Name="VisiedPerson" Type="varchar" Mode="In" />
           <Parameter Name="CheckExitTime" Type="bit" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="NSGVisitorDBModelStoreContainer">
+          <EntitySet Name="BlackListedVisitor" EntityType="Self.BlackListedVisitor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreCity" EntityType="Self.CoreCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreIdentityType" EntityType="Self.CoreIdentityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreQuarterType" EntityType="Self.CoreQuarterType" Schema="dbo" store:Type="Tables" />
@@ -600,6 +677,18 @@
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NSGEmployee" EntityType="Self.NSGEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Visitor" EntityType="Self.Visitor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID" Association="Self.FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUser" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlackListedVisitor_VisitorID_Visitor_VisitorID" Association="Self.FK_BlackListedVisitor_VisitorID_Visitor_VisitorID">
+            <End Role="Visitor" EntitySet="Visitor" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitor" />
+          </AssociationSet>
           <AssociationSet Name="FK_CoreCity_EntryUserID_CoreUser_CoreUserID" Association="Self.FK_CoreCity_EntryUserID_CoreUser_CoreUserID">
             <End Role="CoreUser" EntitySet="CoreUser" />
             <End Role="CoreCity" EntitySet="CoreCity" />
@@ -862,10 +951,12 @@
           <NavigationProperty Name="CoreIdentityTypes1" Relationship="NSGVisitorDBModel.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoreIdentityType" />
           <NavigationProperty Name="NSGEmployees" Relationship="NSGVisitorDBModel.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="NSGEmployee" />
           <NavigationProperty Name="NSGEmployees1" Relationship="NSGVisitorDBModel.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="NSGEmployee" />
-          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
-          <NavigationProperty Name="Visitors1" Relationship="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
           <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoVisitor" />
           <NavigationProperty Name="CoVisitors1" Relationship="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="CoVisitor" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
+          <NavigationProperty Name="Visitors1" Relationship="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="Visitor" />
+          <NavigationProperty Name="BlackListedVisitors" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="BlackListedVisitor" />
+          <NavigationProperty Name="BlackListedVisitors1" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreUser" ToRole="BlackListedVisitor" />
           </EntityType>
         <EntityType Name="ErrorLog">
           <Key>
@@ -1126,6 +1217,23 @@
             <End Role="CoreUser" EntitySet="CoreUsers" />
             <End Role="NSGEmployee" EntitySet="NSGEmployees" />
           </AssociationSet>
+          <EntitySet Name="CoVisitors" EntityType="NSGVisitorDBModel.CoVisitor" />
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" Association="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+            <End Role="CoreRelationship" EntitySet="CoreRelationships" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="CoVisitor" EntitySet="CoVisitors" />
+          </AssociationSet>
           <EntitySet Name="Visitors" EntityType="NSGVisitorDBModel.Visitor" />
           <AssociationSet Name="FK_Visitor_CityID_CoreCity_CityID" Association="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID">
             <End Role="CoreCity" EntitySet="CoreCities" />
@@ -1159,27 +1267,32 @@
             <End Role="CoreUser" EntitySet="CoreUsers" />
             <End Role="Visitor" EntitySet="Visitors" />
           </AssociationSet>
-          <EntitySet Name="CoVisitors" EntityType="NSGVisitorDBModel.CoVisitor" />
-          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
-            <End Role="CoreIdentityType" EntitySet="CoreIdentityTypes" />
-            <End Role="CoVisitor" EntitySet="CoVisitors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" Association="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
-            <End Role="CoreRelationship" EntitySet="CoreRelationships" />
-            <End Role="CoVisitor" EntitySet="CoVisitors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
-            <End Role="CoreUser" EntitySet="CoreUsers" />
-            <End Role="CoVisitor" EntitySet="CoVisitors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
-            <End Role="CoreUser" EntitySet="CoreUsers" />
-            <End Role="CoVisitor" EntitySet="CoVisitors" />
-          </AssociationSet>
           <AssociationSet Name="FK_CoVisitor_VisitorID_Visitor_VisitorID" Association="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID">
             <End Role="Visitor" EntitySet="Visitors" />
             <End Role="CoVisitor" EntitySet="CoVisitors" />
           </AssociationSet>
+          <EntitySet Name="BlackListedVisitors" EntityType="NSGVisitorDBModel.BlackListedVisitor" />
+          <AssociationSet Name="FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID" Association="NSGVisitorDBModel.FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID">
+            <End Role="CoreUser" EntitySet="CoreUsers" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlackListedVisitor_VisitorID_Visitor_VisitorID" Association="NSGVisitorDBModel.FK_BlackListedVisitor_VisitorID_Visitor_VisitorID">
+            <End Role="Visitor" EntitySet="Visitors" />
+            <End Role="BlackListedVisitor" EntitySet="BlackListedVisitors" />
+          </AssociationSet>
+          <FunctionImport Name="BlackListedVisitorDetailsGet" ReturnType="Collection(NSGVisitorDBModel.BlackListedVisitorDetailsGet_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="VisitorName" Mode="In" Type="String" />
+            <Parameter Name="VisiedPerson" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="UnListed" Mode="In" Type="Boolean" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="VisitorsDetailsGet" ReturnType="Collection(NSGVisitorDBModel.VisitorsDetailsGet_Result)">
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
@@ -1187,6 +1300,21 @@
             <Parameter Name="VisitorName" Mode="In" Type="String" />
             <Parameter Name="VisiedPerson" Mode="In" Type="String" />
             <Parameter Name="CheckExitTime" Mode="In" Type="Boolean" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TimeExpiredVisitorDetailsGet" ReturnType="Collection(NSGVisitorDBModel.TimeExpiredVisitorDetailsGet_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="VisitorID" Mode="In" Type="Int64" />
+            <Parameter Name="VisitorName" Mode="In" Type="String" />
+            <Parameter Name="VisiedPerson" Mode="In" Type="String" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="IncludeExited" Mode="In" Type="Boolean" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetNotExitedVisitorsForTheDate" ReturnType="Collection(NSGVisitorDBModel.GetNotExitedVisitorsForTheDate_Result)">
+            <Parameter Name="ForDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="CoreIdentityType">
@@ -1202,8 +1330,8 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_IdentityType_EntryUserID_CoreUser_CoreUserID" FromRole="CoreIdentityType" ToRole="CoreUser" />
           <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_IdentityType_UpdateUserID_CoreUser_CoreUserID" FromRole="CoreIdentityType" ToRole="CoreUser" />
-          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" FromRole="CoreIdentityType" ToRole="Visitor" />
           <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" FromRole="CoreIdentityType" ToRole="CoVisitor" />
+          <NavigationProperty Name="Visitors" Relationship="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" FromRole="CoreIdentityType" ToRole="Visitor" />
           </EntityType>
         <Association Name="FK_IdentityType_EntryUserID_CoreUser_CoreUserID">
           <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
@@ -1313,6 +1441,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CoVisitor">
+          <Key>
+            <PropertyRef Name="CoVisitorID" />
+          </Key>
+          <Property Name="CoVisitorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitorID" Type="Int64" Nullable="false" />
+          <Property Name="CoVisitorName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdentityTypeID" Type="Int32" />
+          <Property Name="IdentityNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VisitorAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RelationshipID" Type="Int32" Nullable="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreIdentityType" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" FromRole="CoVisitor" ToRole="CoreIdentityType" />
+          <NavigationProperty Name="CoreRelationship" Relationship="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" FromRole="CoVisitor" ToRole="CoreRelationship" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitor" Relationship="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" FromRole="CoVisitor" ToRole="Visitor" />
+        </EntityType>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
+          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreIdentityType">
+              <PropertyRef Name="IdentityTypeID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="IdentityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
+          <End Type="NSGVisitorDBModel.CoreRelationship" Role="CoreRelationship" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreRelationship">
+              <PropertyRef Name="RelationshipID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="RelationshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="CoVisitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Visitor">
           <Key>
             <PropertyRef Name="VisitorID" />
@@ -1343,6 +1541,8 @@
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateUserID" Type="Int32" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="VisitedPersonMobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ValidTill" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CoreCity" Relationship="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID" FromRole="Visitor" ToRole="CoreCity" />
           <NavigationProperty Name="CoreIdentityType" Relationship="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" FromRole="Visitor" ToRole="CoreIdentityType" />
           <NavigationProperty Name="CoreQuarterType" Relationship="NSGVisitorDBModel.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" FromRole="Visitor" ToRole="CoreQuarterType" />
@@ -1352,6 +1552,7 @@
           <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" FromRole="Visitor" ToRole="CoreUser" />
           <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" FromRole="Visitor" ToRole="CoreUser" />
           <NavigationProperty Name="CoVisitors" Relationship="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" FromRole="Visitor" ToRole="CoVisitor" />
+          <NavigationProperty Name="BlackListedVisitors" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_VisitorID_Visitor_VisitorID" FromRole="Visitor" ToRole="BlackListedVisitor" />
         </EntityType>
         <Association Name="FK_Visitor_CityID_CoreCity_CityID">
           <End Type="NSGVisitorDBModel.CoreCity" Role="CoreCity" Multiplicity="0..1" />
@@ -1449,76 +1650,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CoVisitor">
-          <Key>
-            <PropertyRef Name="CoVisitorID" />
-          </Key>
-          <Property Name="CoVisitorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VisitorID" Type="Int64" Nullable="false" />
-          <Property Name="CoVisitorName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdentityTypeID" Type="Int32" />
-          <Property Name="IdentityNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="VisitorAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="RelationshipID" Type="Int32" Nullable="false" />
-          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdateUserID" Type="Int32" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CoreIdentityType" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" FromRole="CoVisitor" ToRole="CoreIdentityType" />
-          <NavigationProperty Name="CoreRelationship" Relationship="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" FromRole="CoVisitor" ToRole="CoreRelationship" />
-          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
-          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="CoVisitor" ToRole="CoreUser" />
-          <NavigationProperty Name="Visitor" Relationship="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" FromRole="CoVisitor" ToRole="Visitor" />
-        </EntityType>
-        <Association Name="FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID">
-          <End Type="NSGVisitorDBModel.CoreIdentityType" Role="CoreIdentityType" Multiplicity="0..1" />
-          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CoreIdentityType">
-              <PropertyRef Name="IdentityTypeID" />
-            </Principal>
-            <Dependent Role="CoVisitor">
-              <PropertyRef Name="IdentityTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID">
-          <End Type="NSGVisitorDBModel.CoreRelationship" Role="CoreRelationship" Multiplicity="1" />
-          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CoreRelationship">
-              <PropertyRef Name="RelationshipID" />
-            </Principal>
-            <Dependent Role="CoVisitor">
-              <PropertyRef Name="RelationshipID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CoVisitor_EntryUserID_CoreUser_CoreUserID">
-          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
-          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CoreUser">
-              <PropertyRef Name="CoreUserID" />
-            </Principal>
-            <Dependent Role="CoVisitor">
-              <PropertyRef Name="EntryUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID">
-          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
-          <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CoreUser">
-              <PropertyRef Name="CoreUserID" />
-            </Principal>
-            <Dependent Role="CoVisitor">
-              <PropertyRef Name="UpdateUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CoVisitor_VisitorID_Visitor_VisitorID">
           <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="1" />
           <End Type="NSGVisitorDBModel.CoVisitor" Role="CoVisitor" Multiplicity="*" />
@@ -1531,10 +1662,71 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="VisitorsDetailsGet_Result">
+        <EntityType Name="BlackListedVisitor">
+          <Key>
+            <PropertyRef Name="BlackListedVisitorID" />
+          </Key>
+          <Property Name="BlackListedVisitorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitorID" Type="Int64" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IsBlackListed" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="EntryUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CoreUser" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID" FromRole="BlackListedVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="CoreUser1" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID" FromRole="BlackListedVisitor" ToRole="CoreUser" />
+          <NavigationProperty Name="Visitor" Relationship="NSGVisitorDBModel.FK_BlackListedVisitor_VisitorID_Visitor_VisitorID" FromRole="BlackListedVisitor" ToRole="Visitor" />
+        </EntityType>
+        <Association Name="FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.BlackListedVisitor" Role="BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="EntryUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID">
+          <End Type="NSGVisitorDBModel.CoreUser" Role="CoreUser" Multiplicity="0..1" />
+          <End Type="NSGVisitorDBModel.BlackListedVisitor" Role="BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoreUser">
+              <PropertyRef Name="CoreUserID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="UpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlackListedVisitor_VisitorID_Visitor_VisitorID">
+          <End Type="NSGVisitorDBModel.Visitor" Role="Visitor" Multiplicity="1" />
+          <End Type="NSGVisitorDBModel.BlackListedVisitor" Role="BlackListedVisitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visitor">
+              <PropertyRef Name="VisitorID" />
+            </Principal>
+            <Dependent Role="BlackListedVisitor">
+              <PropertyRef Name="VisitorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="BlackListedVisitorDetailsGet_Result">
           <Property Type="Int64" Name="VisitorID" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="BlackListedOn" Nullable="false" Precision="23" />
+          <Property Type="String" Name="BlackListedBy" Nullable="true" MaxLength="501" />
+          <Property Type="DateTime" Name="UnListedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UnListedBy" Nullable="false" MaxLength="501" />
+          <Property Type="DateTime" Name="InTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="OutTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ValidTill" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OverDueHours" Nullable="true" />
           <Property Type="String" Name="IdentityType" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="IdentityNumber" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
@@ -1542,13 +1734,77 @@
           <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Purpose" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="PersonName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VisitedPersonMobile" Nullable="true" MaxLength="15" />
           <Property Type="String" Name="RankName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CoVisitors" Nullable="false" />
+          <Property Type="String" Name="MachineID" Nullable="false" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="VisitorsDetailsGet_Result">
+          <Property Type="Int64" Name="VisitorID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
           <Property Type="DateTime" Name="InTime" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="OutTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ValidTill" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IdentityType" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="IdentityNumber" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Purpose" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PersonName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VisitedPersonMobile" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="RankName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="CoVisitors" Nullable="false" />
           <Property Type="String" Name="EntryBy" Nullable="true" MaxLength="501" />
           <Property Type="String" Name="ExitBy" Nullable="false" MaxLength="501" />
+          <Property Type="String" Name="MachineID" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="BlackListed" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="TimeExpiredVisitorDetailsGet_Result">
+          <Property Type="Int64" Name="VisitorID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="InTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="OutTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ValidTill" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IdentityType" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="IdentityNumber" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Purpose" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PersonName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VisitedPersonMobile" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="RankName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CoVisitors" Nullable="false" />
+          <Property Type="String" Name="EntryBy" Nullable="true" MaxLength="501" />
+          <Property Type="String" Name="ExitBy" Nullable="false" MaxLength="501" />
+          <Property Type="String" Name="MachineID" Nullable="false" MaxLength="250" />
+          <Property Type="Boolean" Name="PassExpired" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetNotExitedVisitorsForTheDate_Result">
+          <Property Type="Int64" Name="VisitorID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="15" />
+          <Property Type="DateTime" Name="InTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ValidTill" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IdentityType" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="IdentityNumber" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VehicleNumber" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Purpose" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PersonName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VisitedPersonMobile" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="RankName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CoVisitors" Nullable="false" />
+          <Property Type="String" Name="EntryBy" Nullable="true" MaxLength="501" />
           <Property Type="String" Name="MachineID" Nullable="false" MaxLength="250" />
         </ComplexType>
       </Schema>
@@ -1697,9 +1953,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CoVisitors">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoVisitor">
+              <MappingFragment StoreEntitySet="CoVisitor">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
+                <ScalarProperty Name="RelationshipID" ColumnName="RelationshipID" />
+                <ScalarProperty Name="VisitorAddress" ColumnName="VisitorAddress" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="IdentityTypeID" ColumnName="IdentityTypeID" />
+                <ScalarProperty Name="CoVisitorName" ColumnName="CoVisitorName" />
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="CoVisitorID" ColumnName="CoVisitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Visitors">
             <EntityTypeMapping TypeName="NSGVisitorDBModel.Visitor">
               <MappingFragment StoreEntitySet="Visitor">
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="VisitedPersonMobile" ColumnName="VisitedPersonMobile" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
@@ -1729,30 +2005,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CoVisitors">
-            <EntityTypeMapping TypeName="NSGVisitorDBModel.CoVisitor">
-              <MappingFragment StoreEntitySet="CoVisitor">
+          <EntitySetMapping Name="BlackListedVisitors">
+            <EntityTypeMapping TypeName="NSGVisitorDBModel.BlackListedVisitor">
+              <MappingFragment StoreEntitySet="BlackListedVisitor">
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="EntryUserID" ColumnName="EntryUserID" />
-                <ScalarProperty Name="RelationshipID" ColumnName="RelationshipID" />
-                <ScalarProperty Name="VisitorAddress" ColumnName="VisitorAddress" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
-                <ScalarProperty Name="IdentityTypeID" ColumnName="IdentityTypeID" />
-                <ScalarProperty Name="CoVisitorName" ColumnName="CoVisitorName" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="IsBlackListed" ColumnName="IsBlackListed" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
                 <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
-                <ScalarProperty Name="CoVisitorID" ColumnName="CoVisitorID" />
+                <ScalarProperty Name="BlackListedVisitorID" ColumnName="BlackListedVisitorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="VisitorsDetailsGet" FunctionName="NSGVisitorDBModel.Store.VisitorsDetailsGet">
+          <FunctionImportMapping FunctionImportName="BlackListedVisitorDetailsGet" FunctionName="NSGVisitorDBModel.Store.BlackListedVisitorDetailsGet">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NSGVisitorDBModel.VisitorsDetailsGet_Result">
+              <ComplexTypeMapping TypeName="NSGVisitorDBModel.BlackListedVisitorDetailsGet_Result">
                 <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BlackListedOn" ColumnName="BlackListedOn" />
+                <ScalarProperty Name="BlackListedBy" ColumnName="BlackListedBy" />
+                <ScalarProperty Name="UnListedOn" ColumnName="UnListedOn" />
+                <ScalarProperty Name="UnListedBy" ColumnName="UnListedBy" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="OverDueHours" ColumnName="OverDueHours" />
                 <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
                 <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
@@ -1760,13 +2041,89 @@
                 <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
                 <ScalarProperty Name="Purpose" ColumnName="Purpose" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="VisitedPersonMobile" ColumnName="VisitedPersonMobile" />
                 <ScalarProperty Name="RankName" ColumnName="RankName" />
                 <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="CoVisitors" ColumnName="CoVisitors" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VisitorsDetailsGet" FunctionName="NSGVisitorDBModel.Store.VisitorsDetailsGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NSGVisitorDBModel.VisitorsDetailsGet_Result">
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="InTime" ColumnName="InTime" />
                 <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="VisitedPersonMobile" ColumnName="VisitedPersonMobile" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
                 <ScalarProperty Name="CoVisitors" ColumnName="CoVisitors" />
                 <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
                 <ScalarProperty Name="ExitBy" ColumnName="ExitBy" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="BlackListed" ColumnName="BlackListed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TimeExpiredVisitorDetailsGet" FunctionName="NSGVisitorDBModel.Store.TimeExpiredVisitorDetailsGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NSGVisitorDBModel.TimeExpiredVisitorDetailsGet_Result">
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="VisitedPersonMobile" ColumnName="VisitedPersonMobile" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="CoVisitors" ColumnName="CoVisitors" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+                <ScalarProperty Name="ExitBy" ColumnName="ExitBy" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="PassExpired" ColumnName="PassExpired" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNotExitedVisitorsForTheDate" FunctionName="NSGVisitorDBModel.Store.GetNotExitedVisitorsForTheDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NSGVisitorDBModel.GetNotExitedVisitorsForTheDate_Result">
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="VisitedPersonMobile" ColumnName="VisitedPersonMobile" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="CoVisitors" ColumnName="CoVisitors" />
+                <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
                 <ScalarProperty Name="MachineID" ColumnName="MachineID" />
               </ComplexTypeMapping>
             </ResultMapping>

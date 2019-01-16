@@ -35,7 +35,12 @@
         <AssociationConnector Association="NSGVisitorDBModel.FK_NSGEmployee_UnitID_CoreUnit_UnitID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_NSGEmployee_EntryUserID_CoreUser_CoreUserID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_NSGEmployee_UpdateUserID_CoreUser_CoreUserID" />
-        <EntityTypeShape EntityType="NSGVisitorDBModel.Visitor" Width="1.5" PointX="7.5" PointY="20" />
+        <EntityTypeShape EntityType="NSGVisitorDBModel.CoVisitor" Width="1.5" PointX="9.75" PointY="18.125" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" />
+        <EntityTypeShape EntityType="NSGVisitorDBModel.Visitor" Width="1.5" PointX="7.5" PointY="19.875" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_CityID_CoreCity_CityID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_IdentityTypeID_CoreIdentityType_IdentityTypeID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_QuarterTypeID_CoreQuarterType_QuarterTypeID" />
@@ -44,12 +49,11 @@
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_UnitID_CoreUnit_UnitID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_EntryUserID_CoreUser_CoreUserID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_Visitor_UpdateUserID_CoreUser_CoreUserID" />
-        <EntityTypeShape EntityType="NSGVisitorDBModel.CoVisitor" Width="1.5" PointX="9.75" PointY="18.125" />
-        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreIdentityType_IdentityTypeID" />
-        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_RelationshipID_CoreRelationship_RelationshipID" />
-        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_EntryUserID_CoreUser_CoreUserID" />
-        <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_UpdateUserID_CoreUser_CoreUserID" />
         <AssociationConnector Association="NSGVisitorDBModel.FK_CoVisitor_VisitorID_Visitor_VisitorID" />
+        <EntityTypeShape EntityType="NSGVisitorDBModel.BlackListedVisitor" Width="1.5" PointX="9.75" PointY="23.875" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_BlackListedVisitor_EntryUserID_CoreUser_CoreUserID" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_BlackListedVisitor_UpdateUserID_CoreUser_CoreUserID" />
+        <AssociationConnector Association="NSGVisitorDBModel.FK_BlackListedVisitor_VisitorID_Visitor_VisitorID" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

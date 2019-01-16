@@ -9,15 +9,23 @@ using System.Windows.Forms;
 using NSGVisitorManagement.Forms;
 using System.Data.SqlClient;
 using NSGVisitorManagement.Classes;
+using System.Configuration;
 
 namespace NSGVisitorManagement
 {
     public partial class frmMainPage : Form
     {
         Form formToOpen;
+        Timer timerVisitorNotExited;
+        private bool enableExportNotExitedVisitor = false;
+        TimeSpan timeToExportNotExitedVisitor;
+
         public frmMainPage()
         {
             InitializeComponent();
+
+            enableExportNotExitedVisitor = bool.Parse(ConfigurationManager.AppSettings["ExportNotExitedVisitor"].ToString());
+            timeToExportNotExitedVisitor = TimeSpan.Parse(ConfigurationManager.AppSettings["ExportNotExitedVisitorTime"].ToString());
         }
 
         private void mnuFileExit_Click(object sender, EventArgs e)
@@ -79,6 +87,26 @@ namespace NSGVisitorManagement
         private void frmMainPage_Load(object sender, EventArgs e)
         {
             this.Text = " Welcome " + GlobalClass.EmployeeName + " [ "+ GlobalClass.LoggedInUserRank +" ] " + " [" + GlobalClass.LoggedInUserUnit + "] " + " | " + GlobalClass.ProductName + " [" + GlobalClass.BuildVersion + "]";
+
+            //if (enableExportNotExitedVisitor)
+            //{
+            //    timerVisitorNotExited = new Timer();
+            //    timerVisitorNotExited.Tick += TimerVisitorNotExited_Tick;
+            //    timerVisitorNotExited.Interval = 1000 * 60 * 15;
+            //    timerVisitorNotExited.Start();
+            //}
+        }
+
+        private void TimerVisitorNotExited_Tick(object sender, EventArgs e)
+        {
+            //if (DateTime.Now.TimeOfDay >= timeToExportNotExitedVisitor)
+            //{
+            //    timerVisitorNotExited.Stop();
+
+            //    formToOpen = new frmExportNotExitedVisitors();
+            //    formToOpen.MdiParent = this;
+            //    formToOpen.Show();
+            //}
         }
 
         private void mnuFileNSGEmployees_Click(object sender, EventArgs e)
@@ -163,6 +191,42 @@ namespace NSGVisitorManagement
             }
 
             formToOpen = new frmMasterList(masterType);
+            formToOpen.MdiParent = this;
+            formToOpen.Show();
+        }
+
+        private void mnuVisitorBookTimeExpiredVisitors_Click(object sender, EventArgs e)
+        {
+            if (CheckIsFormOpen("frmTimeExpiredVisitor"))
+            {
+                return;
+            }
+
+            formToOpen = new frmTimeExpiredVisitor();
+            formToOpen.MdiParent = this;
+            formToOpen.Show();
+        }
+
+        private void mnuVisitorBookBlackListedVisitors_Click(object sender, EventArgs e)
+        {
+            if (CheckIsFormOpen("frmBlackListedVisitor"))
+            {
+                return;
+            }
+
+            formToOpen = new frmBlackListedVisitor();
+            formToOpen.MdiParent = this;
+            formToOpen.Show();
+        }
+
+        private void mnuVisitorBookNotExitedVisitorsToday_Click(object sender, EventArgs e)
+        {
+            if (CheckIsFormOpen("frmExportNotExitedVisitors"))
+            {
+                return;
+            }
+
+            formToOpen = new frmExportNotExitedVisitors();
             formToOpen.MdiParent = this;
             formToOpen.Show();
         }

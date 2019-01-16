@@ -33,10 +33,12 @@ namespace NSGVisitorManagement.DAL
             this.CoreIdentityTypes1 = new HashSet<CoreIdentityType>();
             this.NSGEmployees = new HashSet<NSGEmployee>();
             this.NSGEmployees1 = new HashSet<NSGEmployee>();
-            this.Visitors = new HashSet<Visitor>();
-            this.Visitors1 = new HashSet<Visitor>();
             this.CoVisitors = new HashSet<CoVisitor>();
             this.CoVisitors1 = new HashSet<CoVisitor>();
+            this.Visitors = new HashSet<Visitor>();
+            this.Visitors1 = new HashSet<Visitor>();
+            this.BlackListedVisitors = new HashSet<BlackListedVisitor>();
+            this.BlackListedVisitors1 = new HashSet<BlackListedVisitor>();
         }
     
         public int CoreUserID { get; set; }
@@ -84,12 +86,16 @@ namespace NSGVisitorManagement.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NSGEmployee> NSGEmployees1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoVisitor> CoVisitors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoVisitor> CoVisitors1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitor> Visitors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitor> Visitors1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoVisitor> CoVisitors { get; set; }
+        public virtual ICollection<BlackListedVisitor> BlackListedVisitors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoVisitor> CoVisitors1 { get; set; }
+        public virtual ICollection<BlackListedVisitor> BlackListedVisitors1 { get; set; }
     }
 }

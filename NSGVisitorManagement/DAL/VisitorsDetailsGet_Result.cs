@@ -16,6 +16,9 @@ namespace NSGVisitorManagement.DAL
         public long VisitorID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public System.DateTime InTime { get; set; }
+        public Nullable<System.DateTime> OutTime { get; set; }
+        public Nullable<System.DateTime> ValidTill { get; set; }
         public string IdentityType { get; set; }
         public string IdentityNumber { get; set; }
         public string CityName { get; set; }
@@ -23,13 +26,13 @@ namespace NSGVisitorManagement.DAL
         public string VehicleNumber { get; set; }
         public string Purpose { get; set; }
         public string PersonName { get; set; }
+        public string VisitedPersonMobile { get; set; }
         public string RankName { get; set; }
         public string UnitName { get; set; }
-        public System.DateTime InTime { get; set; }
-        public Nullable<System.DateTime> OutTime { get; set; }
         public int CoVisitors { get; set; }
         public string EntryBy { get; set; }
         public string ExitBy { get; set; }
         public string MachineID { get; set; }
+        public string BlackListed { get; set; }
     }
 }

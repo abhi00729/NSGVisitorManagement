@@ -19,6 +19,9 @@ namespace NSGVisitorManagement.Forms
     public partial class frmVisitorSearch : Form
     {
         private bool beenHere;
+        long totalInForDate = 0;
+        long totalOutForDate = 0;
+
         private DataSet DSExcel = new DataSet();
 
         private NSGVisitorEntities DB = new NSGVisitorEntities();
@@ -68,25 +71,10 @@ namespace NSGVisitorManagement.Forms
 
         private void LoadValues()
         {
-            long? visitorNumber = null;
-
-            string Message = Validation.ValidateDateSelection(dteEntryDateFrom, dteEntryDateTo);
-
-            if (Message != String.Empty)
-            {
-                MessageBox.Show(Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if(txtVisitorNumber.Text.Length > 0 && Validation.ValidateTextIsNumeric(txtVisitorNumber))
-            {
-                visitorNumber = long.Parse(txtVisitorNumber.Text);
-            }
-
-            var visitorDetails = DB.VisitorsDetailsGet(dteEntryDateFrom.Value.Date, dteEntryDateTo.Value.Date, visitorNumber, txtVisitorName.Text, txtVisitedPerson.Text, chkExitDate.Checked);
+            var visitorDetails = GetData(GlobalClass.MaxSearchRows);
             
             grdVisitorDetails.DataSource = null;
-            grdVisitorDetails.DataSource = visitorDetails.ToList();
+            grdVisitorDetails.DataSource = visitorDetails;
             
             if (grdVisitorDetails.Rows.Count > 0)
             {
@@ -95,18 +83,67 @@ namespace NSGVisitorManagement.Forms
             
             if (grdVisitorDetails.Rows.Count > 0)
             {
-                lblTotalRecordCount.Text = "Total Records Found: (" + Convert.ToString(grdVisitorDetails.Rows.Count) + ") out of [" + Convert.ToString(DB.Visitors.Count()) + "]";
+                lblTotalRecordCount.Text = "Total Records Found: (" + grdVisitorDetails.Rows.Count.ToString() + ") out of [" + DB.Visitors.Count().ToString() + "]"
+                    + " | In For Date (" + totalInForDate.ToString() + ") Out For Date (" + totalOutForDate.ToString() + ")";
             }
             else
             {
-                lblTotalRecordCount.Text = "Total Records Found: (0)";
+                lblTotalRecordCount.Text = "Total Records Found: (0)" + " | In For Date (" + totalInForDate.ToString() + ") Out For Date (" + totalOutForDate.ToString() + ")";
             }
 
             btnExcelExport.Enabled = false;
+
             if (grdVisitorDetails.Rows.Count > 0)
             {
                 btnExcelExport.Enabled = true;
             }
+        }
+
+        private List<VisitorsDetailsGet_Result> GetData(int maxRows, bool forExport = false)
+        {
+            long ? visitorNumber = null;
+            string mobileNumber = string.Empty;
+            DateTime dteEntrySearchDate;
+            DateTime? dteExitSearchDate;
+
+            dteEntrySearchDate = dteEntryDateFrom.Value.Date;
+            dteExitSearchDate = dteEntryDateTo.Value.Date.AddDays(1);
+
+            string Message = Validation.ValidateDateSelection(dteEntryDateFrom, dteEntryDateTo);
+
+            if (Message != String.Empty)
+            {
+                MessageBox.Show(Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+
+            if (txtVisitorNumber.Text.Length > 0 && Validation.ValidateTextIsNumeric(txtVisitorNumber))
+            {
+                visitorNumber = long.Parse(txtVisitorNumber.Text);
+            }
+
+            if (txtMobileNo.Text.Length > 0 && Validation.ValidateTextIsNumeric(txtMobileNo))
+            {
+                mobileNumber = txtMobileNo.Text;
+            }
+
+            if (!forExport)
+            {
+                totalInForDate = DB.Visitors.Where(v => v.InTime >= dteEntrySearchDate && v.InTime <= dteExitSearchDate).Count();
+                totalOutForDate = DB.Visitors.Where(v => v.InTime >= dteEntrySearchDate && v.InTime <= dteExitSearchDate && v.OutTime != null).Count();
+            }
+
+            var searchResult = DB.VisitorsDetailsGet(
+                dteEntryDateFrom.Value.Date,
+                dteEntryDateTo.Value.Date,
+                visitorNumber,
+                txtVisitorName.Text,
+                txtVisitedPerson.Text,
+                chkExitDate.Checked,
+                mobileNumber,
+                maxRows);
+
+            return searchResult.ToList();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -125,18 +162,14 @@ namespace NSGVisitorManagement.Forms
             {
                 if (form.Name == "frmVisitor")
                 {
-                    //form.Activate();
                     form.Close();
                     break;
-                    //return;
                 }
             }
 
-            frmVisitor visitorEntry = new frmVisitor(int.Parse(grdVisitorDetails.CurrentRow.Cells[0].Value.ToString()), true);
+            frmVisitor visitorEntry = new frmVisitor(long.Parse(grdVisitorDetails.CurrentRow.Cells[0].Value.ToString()), true);
             visitorEntry.MdiParent = this.MdiParent;
-            //this.Hide();
             visitorEntry.Show();
-            //this.Close();
         }
 
         private void chkShowExported_CheckedChanged(object sender, EventArgs e)
@@ -176,6 +209,10 @@ namespace NSGVisitorManagement.Forms
 
             try
             {
+                var visitorDetails = GetData(2000, true);
+
+                var dtVisitorDetails = GlobalClass.ConvertToDataTable(visitorDetails);
+
                 panel1.Enabled = false;
                 panel2.Enabled = false;
                 panel3.Enabled = false;
@@ -188,19 +225,19 @@ namespace NSGVisitorManagement.Forms
                 ws = (MsExl.Worksheet)wb.ActiveSheet;
 
                 // Headers. 
-                for (int i = 0; i < grdVisitorDetails.Columns.Count; i++)
+                for (int i = 0; i < dtVisitorDetails.Columns.Count; i++)
                 {
-                    ws.Cells[1, i + 1] = grdVisitorDetails.Columns[i].Name;
+                    ws.Cells[1, i + 1] = dtVisitorDetails.Columns[i].ColumnName;
                 }
 
                 // Content.  
-                for (int i = 0; i < grdVisitorDetails.Rows.Count; i++)
+                for (int i = 0; i < dtVisitorDetails.Rows.Count; i++)
                 {
-                    for (int j = 0; j < grdVisitorDetails.Columns.Count; j++)
+                    for (int j = 0; j < dtVisitorDetails.Columns.Count; j++)
                     {
-                        if (grdVisitorDetails.Rows[i].Cells[j].Value != null)
+                        if (dtVisitorDetails.Rows[i][j] != null)
                         {
-                            ws.Cells[i + 2, j + 1] = grdVisitorDetails.Rows[i].Cells[j].Value.ToString();
+                            ws.Cells[i + 2, j + 1] = dtVisitorDetails.Rows[i][j].ToString();
                         }
                     }
                 }
@@ -209,8 +246,8 @@ namespace NSGVisitorManagement.Forms
                 ws.Columns.AutoFit();
                 ws.Rows.WrapText = true;
 
-                ws.Range[ws.Cells[1, 1], ws.Cells[grdVisitorDetails.Rows.Count + 1, grdVisitorDetails.Columns.Count]].Borders.LineStyle = true;
-                ws.Range[ws.Cells[1, 1], ws.Cells[1, grdVisitorDetails.Columns.Count]].Font.Bold = true;
+                ws.Range[ws.Cells[1, 1], ws.Cells[dtVisitorDetails.Rows.Count + 1, dtVisitorDetails.Columns.Count]].Borders.LineStyle = true;
+                ws.Range[ws.Cells[1, 1], ws.Cells[1, dtVisitorDetails.Columns.Count]].Font.Bold = true;
 
                 wb.SaveAs(GetExportFileName(".xls"), MsExl.XlFileFormat.xlWorkbookNormal,
                     Missing.Value, Missing.Value, Missing.Value, Missing.Value,

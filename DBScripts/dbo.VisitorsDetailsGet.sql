@@ -1,4 +1,5 @@
-
+USE NSGVisitorManagement
+GO
 
 --DROP TABLE ParameterCheck
 --CREATE TABLE ParameterCheck
@@ -11,7 +12,7 @@
 --	CheckExitTime BIT
 --)
 
-IF EXISTS(SELECT * FROM sys.procedures (NOLOCK) WHERE name = 'VisitorsDetailsGet')
+IF EXISTS(SELECT 1 FROM sys.procedures (NOLOCK) WHERE name = 'VisitorsDetailsGet')
 BEGIN
 	DROP PROCEDURE dbo.VisitorsDetailsGet
 END
@@ -24,7 +25,9 @@ CREATE PROCEDURE dbo.VisitorsDetailsGet
 	@VisitorID BIGINT = NULL,
 	@VisitorName VARCHAR(500) = NULL,
 	@VisiedPerson VARCHAR(500) = NULL,
-	@CheckExitTime BIT = 0
+	@CheckExitTime BIT = 0,
+	@MobileNo VARCHAR(15),
+	@MaxRows INT = 100
 )
 AS
 /*
@@ -39,15 +42,21 @@ BEGIN
 
 	IF(@ToDate IS NOT NULL)
 	BEGIN
-		SET @ToDate = DATEADD(SECOND, -1, CAST(CAST(@ToDate + 1 AS DATE) AS DATETIME))
+		SELECT @ToDate = DATEADD(SECOND, -1, CAST(CAST(@ToDate + 1 AS DATE) AS DATETIME))
 	END
 
-	SELECT TOP 100 
+	IF(@MobileNo = '')
+	BEGIN
+		SELECT @MobileNo = NULL 
+	END
+
+	SELECT TOP (@MaxRows)
 		V.VisitorID,
 		V.FirstName,
 		V.LastName,
 		V.InTime,
 		V.OutTime,
+		V.ValidTill,
 		CIT.IdentityType,
 		V.IdentityNumber,
 		CC.CityName,
@@ -55,12 +64,14 @@ BEGIN
 		V.VehicleNumber,
 		V.Purpose,
 		V.PersonName,
+		V.VisitedPersonMobile,
 		CR.RankName,
 		CU.UnitName,
 		ISNULL(CV.CoVisitors, 0) AS CoVisitors,
 		CUREN.FirstName + ' ' + CUREN.LastName AS EntryBy,
 		CASE WHEN V.OutTime IS NOT NULL THEN ISNULL(CUREX.FirstName, '') + ISNULL(' ' + CUREX.LastName, '') ELSE '' END AS ExitBy,
-		V.MachineID
+		V.MachineID,
+		CASE ISNULL(BLV.IsBlackListed, 0) WHEN 1 THEN 'Yes' ELSE 'No' END AS BlackListed
 	FROM dbo.Visitor (NOLOCK) V
 	INNER JOIN dbo.CoreIdentityType (NOLOCK) CIT 
 		ON V.IdentityTypeID = cit.IdentityTypeID
@@ -75,9 +86,11 @@ BEGIN
 	LEFT JOIN dbo.CoreUser (NOLOCK) CUREX
 		ON CUREX.CoreUserID = V.UpdateUserID
 	LEFT JOIN dbo.CoreCity (NOLOCK) CC 
-		ON cc.CityID = V.CityID
+		ON CC.CityID = V.CityID
 	LEFT JOIN (SELECT VisitorID, COUNT(CoVisitorID) AS CoVisitors FROM dbo.CoVisitor (NOLOCK) GROUP BY VisitorID) AS CV
 		ON CV.VisitorID = V.VisitorID
+	LEFT JOIN dbo.BlackListedVisitor (NOLOCK) BLV
+		ON BLV.VisitorID = V.VisitorID
 	WHERE (V.InTime >= @FromDate OR @CheckExitTime = 1)
 		AND (V.InTime <= @ToDate OR @CheckExitTime = 1)
 		AND (V.OutTime >= @FromDate OR @CheckExitTime = 0)
@@ -85,6 +98,7 @@ BEGIN
 		AND (V.VisitorID = @VisitorID OR @VisitorID IS NULL)
 		AND (V.FirstName LIKE @VisitorName OR V.LastName LIKE @VisitorName)
 		AND (V.PersonName LIKE @VisiedPerson)
+		AND (V.MobileNo = @MobileNo OR @MobileNo IS NULL)
 	ORDER BY V.EntryDate DESC
 
 	SET NOCOUNT OFF

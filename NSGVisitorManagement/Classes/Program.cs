@@ -23,6 +23,9 @@ namespace NSGVisitorManagement
             GlobalClass.BuildVersion = Application.ProductVersion;
             GlobalClass.ProductName = Application.ProductName;
             GlobalClass.PrinterName = ConfigurationManager.AppSettings["PrinterName"].ToString();
+            GlobalClass.DefaultPassValidHours = int.Parse(ConfigurationManager.AppSettings["DefaultPassValidHours"].ToString());
+            GlobalClass.MaxSearchRows = int.Parse(ConfigurationManager.AppSettings["MaxSearchRows"].ToString());
+
             Application.Run(new frmLogin());
         }
     }
